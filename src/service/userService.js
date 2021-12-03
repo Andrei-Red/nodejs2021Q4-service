@@ -10,11 +10,10 @@ class UserService {
   }
 
   getUsersById(id) {
-    const user = this.db.users.find((u) => u.id === id);
-    return user;
+    return this.db.users.find((u) => u.id === id);
   }
 
-  setUser(user) {
+  addUser(user) {
     this.db.users.push(user)
     return user
   }
@@ -30,10 +29,19 @@ class UserService {
     const userIndex = this.db.users.findIndex((u) => u.id === id);
     if(userIndex) {
       this.db.users.splice(userIndex,1)
+      this._updateUserIdInTacks(id)
       return true
     } else {
       return false
     }
+  }
+
+  _updateUserIdInTacks(userId) {
+    this.db.tacks.forEach((task) => {
+      if(task.userId === userId) {
+        task.userId = null
+      }
+    })
   }
 }
 

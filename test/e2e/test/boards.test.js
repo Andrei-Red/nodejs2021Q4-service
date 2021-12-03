@@ -42,6 +42,9 @@ describe('Boards suite', () => {
         .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
+          console.log('res.body', res.body);
+          console.log('res.body length', res.body.length);
+
           debug(res.body);
           expect(res.body).to.be.an('array');
           jestExpect(res.body).not.toHaveLength(0);

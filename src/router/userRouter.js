@@ -1,13 +1,18 @@
 const Router = require('koa-router');
 const UserService = require('../service/userService');
-const User = require('../models/User');
+const UserRouter = require('../models/User');
 
 const routerUser = new Router();
 const userService = new UserService();
 
 routerUser.get('/users', async (ctx) => {
-  const allUsers = userService.getUsers();
-  ctx.body = allUsers;
+  try {
+    ctx.body = userService.getUsers();
+  } catch (e) {
+    ctx.response.status = 500;
+    console.error(e);
+    ctx.body = { message: e.message };
+  }
 });
 
 routerUser.get('/users/:id', async (ctx) => {
@@ -30,9 +35,9 @@ routerUser.get('/users/:id', async (ctx) => {
 routerUser.post('/users', async (ctx) => {
   try {
     const userData = ctx.request.body;
-    const user = new User(userData);
-    const userDataToResponse = User.toResponse(user)
-    userService.setUser(userDataToResponse);
+    const user = new UserRouter(userData);
+    const userDataToResponse = UserRouter.toResponse(user)
+    userService.addUser(userDataToResponse);
     ctx.response.status = 201;
     ctx.body = userDataToResponse;
   } catch (e) {
@@ -47,8 +52,7 @@ routerUser.put('/users/:id', async (ctx) => {
     const userData = ctx.request.body;
     const userId = ctx.params.id;
 
-    const updatedUser = userService.updateUser(userId, userData);
-    ctx.body = updatedUser;
+    ctx.body = userService.updateUser(userId, userData);
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
