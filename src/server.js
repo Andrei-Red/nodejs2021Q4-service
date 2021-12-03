@@ -1,6 +1,26 @@
 const { PORT } = require('./common/config');
-const app = require('./app');
+const Koa = require('koa');
+const koaBody = require('koa-body')
 
-app.listen(PORT, () =>
+const routerUser = require('./router/user')
+const routerBoard = require('./router/board')
+const routerTask = require('./router/task')
+
+const server = new Koa()
+
+server.use(koaBody())
+
+server.use(routerUser.routes())
+server.use(routerUser.allowedMethods())
+server.use(routerBoard.routes())
+server.use(routerBoard.allowedMethods())
+server.use(routerTask.routes())
+server.use(routerTask.allowedMethods())
+
+// server.use(async (ctx, next) => {
+//   ctx.body = 'Hello world'
+// })
+
+server.listen(PORT, () =>
   console.log(`App is running on http://localhost:${PORT}`)
 );
