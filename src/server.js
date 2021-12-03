@@ -1,4 +1,6 @@
 const { PORT } = require('./common/config');
+
+const json = require('koa-json');
 const Koa = require('koa');
 const koaBody = require('koa-body')
 
@@ -9,6 +11,7 @@ const routerTask = require('./router/task')
 const server = new Koa()
 
 server.use(koaBody())
+// server.use(json());
 
 server.use(routerUser.routes())
 server.use(routerUser.allowedMethods())
