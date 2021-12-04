@@ -10,8 +10,7 @@ class TaskService {
   }
 
   getTaskById(boardId, taskId) {
-    // const boardTasks = this.db.tacks.filter(t => t.boardId === boardId)
-    return this.db.tacks.filter.filter(t => t.id === taskId)
+    return this.db.tacks.find(t => t.id === taskId)
   }
 
   addTask(task) {
@@ -20,24 +19,22 @@ class TaskService {
   }
 
   updateTask(boardId, taskId, newTask) {
-    // const boardTasks = this.db.tacks.filter(t => t.boardId === boardId)
-    const thisTask = this.db.tacks.filter(t => t.id === taskId)
+    const thisTask = this.db.tacks.find(t => t.id === taskId)
     const {title, order, description} = newTask
-    thisTask.titlt = title
+    thisTask.title = title
     thisTask.order = order
     thisTask.description = description
     // thisTask.borderId = borderId
     // thisTask.columnsId = columnsId
     // thisTask.userId = userId
 
-
     return thisTask
   }
 
   deleteTask(boardId, taskId) {
     const taskIndex = this.db.tacks.findIndex((t) => t.id === taskId);
-    if(taskIndex) {
-      this.db.users.splice(taskIndex,1)
+    if(taskIndex !== -1) {
+      this.db.tacks.splice(taskIndex,1)
       return true
     } else {
       return false

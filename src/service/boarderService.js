@@ -27,7 +27,7 @@ class BoarderService {
 
   deleteBoard(id) {
     const boardIndex = this.db.boards.findIndex((b) => b.id === id);
-    if(boardIndex) {
+    if(boardIndex !== -1) {
       this.db.boards.splice(boardIndex,1)
       this._deleteBoardSTacks(id)
       return true

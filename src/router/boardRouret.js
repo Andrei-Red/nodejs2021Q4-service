@@ -23,7 +23,7 @@ routerBoard.get('/boards/:id', async (ctx) => {
       ctx.body = board
     } else {
       ctx.response.status = 404
-      ctx.body = { message: `Board not found by id: ${userId}` };
+      ctx.body = { message: `Board not found by id: ${boardId}` };
     }
   }catch (e) {
     ctx.response.status = 500;

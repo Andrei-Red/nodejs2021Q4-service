@@ -27,7 +27,7 @@ class UserService {
 
   deleteUser(id) {
     const userIndex = this.db.users.findIndex((u) => u.id === id);
-    if(userIndex) {
+    if(userIndex !== -1) {
       this.db.users.splice(userIndex,1)
       this._updateUserIdInTacks(id)
       return true
