@@ -1,4 +1,5 @@
 const Router = require('koa-router');
+
 const routerTask = new Router();
 const TaskService = require('../service/taskService');
 const Task = require('../models/Task');
@@ -7,7 +8,7 @@ const taskService = new TaskService();
 
 routerTask.get('/boards/:boardId/tasks', async (ctx) => {
   try {
-    const boardId = ctx.params.boardId;
+    const {boardId} = ctx.params;
     ctx.body = taskService.getTasks(boardId);
   } catch (e) {
     ctx.response.status = 500;
@@ -18,8 +19,8 @@ routerTask.get('/boards/:boardId/tasks', async (ctx) => {
 
 routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx) => {
   try {
-    const boardId = ctx.params.boardId;
-    const taskId = ctx.params.taskId;
+    const {boardId} = ctx.params;
+    const {taskId} = ctx.params;
 
     const task = taskService.getTaskById(boardId, taskId);
     if (task) {
@@ -53,8 +54,8 @@ routerTask.post('/boards/:boardId/tasks', async (ctx) => {
 
 routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx) => {
   try {
-    const boardId = ctx.params.boardId;
-    const taskId = ctx.params.taskId;
+    const {boardId} = ctx.params;
+    const {taskId} = ctx.params;
     const taskData = ctx.request.body;
     taskData.boardId = boardId
 
@@ -68,8 +69,8 @@ routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx) => {
 
 routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx) => {
   try {
-    const boardId = ctx.params.boardId;
-    const taskId = ctx.params.taskId;
+    const {boardId} = ctx.params;
+    const {taskId} = ctx.params;
 
     const isTaskDeleted = taskService.deleteTask(boardId, taskId);
 

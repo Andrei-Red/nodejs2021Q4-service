@@ -36,9 +36,9 @@ class TaskService {
     if(taskIndex !== -1) {
       this.db.tacks.splice(taskIndex,1)
       return true
-    } else {
+    } 
       return false
-    }
+    
   }
 }
 

@@ -14,34 +14,38 @@ class UserService {
   }
 
   addUser(user) {
-    this.db.users.push(user)
-    return user
+    this.db.users.push(user);
+    return user;
   }
 
   updateUser(id, newUser) {
     const user = this.db.users.find((u) => u.id === id);
-    user.name = newUser.name
-    user.login = newUser.login
-    return user
+    user.name = newUser.name;
+    user.login = newUser.login;
+    return user;
   }
 
   deleteUser(id) {
     const userIndex = this.db.users.findIndex((u) => u.id === id);
-    if(userIndex !== -1) {
-      this.db.users.splice(userIndex,1)
-      this._updateUserIdInTacks(id)
-      return true
-    } else {
-      return false
+    if (userIndex !== -1) {
+      this.db.users.splice(userIndex, 1);
+      this._updateUserIdInTacks(id);
+      return true;
     }
+    return false;
   }
 
   _updateUserIdInTacks(userId) {
+    function setNullValue(value) {
+      const theValue = value;
+      theValue.userId = null;
+    }
+
     this.db.tacks.forEach((task) => {
-      if(task.userId === userId) {
-        task.userId = null
+      if (task.userId === userId) {
+        setNullValue(task);
       }
-    })
+    });
   }
 }
 

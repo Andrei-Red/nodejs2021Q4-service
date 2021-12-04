@@ -31,9 +31,9 @@ class BoarderService {
       this.db.boards.splice(boardIndex,1)
       this._deleteBoardSTacks(id)
       return true
-    } else {
+    } 
       return false
-    }
+    
   }
 
   _deleteBoardSTacks (id) {
