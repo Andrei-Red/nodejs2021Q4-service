@@ -9,8 +9,11 @@ export interface IUser {
 
 class User implements IUser {
   id: string;
+
   name: string;
+
   login: string;
+
   password: string;
 
   constructor(user = {} as IUser) {
@@ -20,7 +23,7 @@ class User implements IUser {
     this.password = user.password;
   }
 
-  static toResponse(user) {
+  static toResponse(user: IUser) {
     const { id, name, login } = user;
     return { id, name, login };
   }

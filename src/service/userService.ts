@@ -8,9 +8,9 @@ interface IUserService {
   db: TTrelloDB;
 
   getUsers(): IUser[]
-  getUsersById(id): IUser;
+  getUsersById(id: string): IUser | undefined;
   addUser(user: IUser): IUser;
-  updateUser(id: string, newUser: IUser): IUser;
+  updateUser(id: string, newUser: IUser): IUser | undefined ;
   deleteUser(id: string): boolean;
   _updateUserIdInTacks(userId: string): void
 }
@@ -26,7 +26,7 @@ class UserService implements IUserService{
     return this.db.users;
   }
 
-  getUsersById(id: string) {
+  getUsersById(id: string): IUser | undefined {
     return this.db.users.find((u: IUser) => u.id === id);
   }
 
@@ -35,10 +35,12 @@ class UserService implements IUserService{
     return user;
   }
 
-  updateUser(id: string, newUser: IUser) {
+  updateUser(id: string, newUser: IUser): IUser | undefined {
     const user = this.db.users.find((u: IUser) => u.id === id);
-    user.name = newUser.name;
-    user.login = newUser.login;
+    if(user) {
+      user.name = newUser.name;
+      user.login = newUser.login;
+    }
     return user;
   }
 

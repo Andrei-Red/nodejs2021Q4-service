@@ -13,6 +13,7 @@
     "start:ts": "tsc && nodemon dist/server.js",
     "lint": "eslint --ext .js,.ts --fix src/",
     "lint:fix": "eslint --fix --ext .js.",
+    "lint:fix:ts": "eslint --fix --ext .ts.",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
   },
@@ -58,6 +59,7 @@
     "yamljs": "0.3.0"
   },
   "devDependencies": {
+    "@types/koa-bodyparser": "^4.3.4",
     "@types/koa-router": "^7.4.4",
     "@types/node": "^16.11.12",
     "@typescript-eslint/eslint-plugin": "^5.6.0",

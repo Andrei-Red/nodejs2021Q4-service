@@ -1,72 +1,72 @@
-const RouterBoard = require('koa-router');
+import { Context } from 'koa';
+import Router from 'koa-router'
 
-const routerBoard = new RouterBoard();
-const Board = require('../models/Board')
-const BoardService = require('../service/boarderService')
+const routerBoard = new Router();
+const Board = require('../models/Board');
+const BoardService = require('../service/boarderService');
 
-const boardService = new BoardService()
+const boardService = new BoardService();
 
-routerBoard.get('/boards', async (ctx) => {
+routerBoard.get('/boards', async (ctx: Context) => {
   try {
-    ctx.body = boardService.getBoard()
+    ctx.body = boardService.getBoard();
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
-    ctx.body = { message: e.message };
+    ctx.body = { message: (e as Error).message };
   }
 });
 
-routerBoard.get('/boards/:id', async (ctx) => {
+routerBoard.get('/boards/:id', async (ctx: Context) => {
   try {
-    const boardId = ctx.params.id
-    const board = boardService.getBoardById(boardId)
-    if(board) {
-      ctx.body = board
+    const boardId = ctx.params.id;
+    const board = boardService.getBoardById(boardId);
+    if (board) {
+      ctx.body = board;
     } else {
-      ctx.response.status = 404
+      ctx.response.status = 404;
       ctx.body = { message: `Board not found by id: ${boardId}` };
     }
-  }catch (e) {
-    ctx.response.status = 500;
-    console.error(e);
-    ctx.body = { message: e.message };
-  }
-})
-
-routerBoard.post('/boards', async (ctx) => {
-  try {
-    const boardData = ctx.request.body
-    const board = new Board(boardData)
-    boardService.addBoard(board)
-    ctx.response.status = 201;
-    ctx.response.body = board
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
-    ctx.body = { message: e.message };
+    ctx.body = { message: (e as Error).message };
   }
 });
 
-routerBoard.put('/boards/:id', async (ctx) => {
+routerBoard.post('/boards', async (ctx: Context) => {
+  try {
+    const boardData = ctx.request.body;
+    const board = new Board(boardData);
+    boardService.addBoard(board);
+    ctx.response.status = 201;
+    ctx.response.body = board;
+  } catch (e) {
+    ctx.response.status = 500;
+    console.error(e);
+    ctx.body = { message: (e as Error).message };
+  }
+});
+
+routerBoard.put('/boards/:id', async (ctx: Context) => {
   try {
     const boardData = ctx.request.body;
     const boardsId = ctx.params.id;
 
-    ctx.body = boardService.updateBoard(boardsId, boardData)
+    ctx.body = boardService.updateBoard(boardsId, boardData);
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
-    ctx.body = { message: e.message };
+    ctx.body = { message: (e as Error).message };
   }
 });
 
-
-routerBoard.delete('/boards/:id', async (ctx) => {
+routerBoard.delete('/boards/:id', async (ctx: Context) => {
   try {
     const boardsId = ctx.params.id;
 
-    const isBoardDeleted = boardService.deleteBoard(boardsId)
-    if(isBoardDeleted) {
+    const isBoardDeleted = boardService.deleteBoard(boardsId);
+    if (isBoardDeleted) {
       ctx.response.status = 204;
     } else {
       ctx.response.status = 400;
@@ -75,8 +75,8 @@ routerBoard.delete('/boards/:id', async (ctx) => {
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
-    ctx.body = { message: e.message };
+    ctx.body = { message: (e as Error).message };
   }
-})
+});
 
-module.exports = { routerBoard }
+module.exports = { routerBoard };

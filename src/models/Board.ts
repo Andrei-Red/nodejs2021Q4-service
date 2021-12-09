@@ -1,4 +1,5 @@
 import { IColumn } from './Column';
+
 const { v4 } = require('uuid');
 
 export interface IBoard {
@@ -9,7 +10,9 @@ export interface IBoard {
 
 class Board implements IBoard {
   id: string
+
   title: string
+
   columns
 
   constructor(board = {} as IBoard) {

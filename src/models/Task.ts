@@ -5,19 +5,25 @@ export interface ITask {
   title: string;
   order: number;
   description: string;
-  userId: string;
-  boardId: string;
-  columnId: string;
+  userId: string | null;
+  boardId: string | null;
+  columnId: string | null;
 }
 
 class Task implements ITask {
   id: string;
+
   title: string;
+
   order: number;
+
   description: string;
-  userId: string;
-  boardId: string;
-  columnId: string;
+
+  userId: string | null;
+
+  boardId: string | null;
+
+  columnId: string | null;
 
   constructor(task = {} as ITask) {
     this.id = v4();

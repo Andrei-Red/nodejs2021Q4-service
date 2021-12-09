@@ -7,9 +7,9 @@ interface ITaskService {
   db: TTrelloDB;
 
   getTasks(boardId: string): ITask[];
-  getTaskById(boardId: string, taskId: string): ITask;
+  getTaskById(boardId: string, taskId: string): ITask | undefined;
   addTask(task: ITask): ITask;
-  updateTask(boardId: string, taskId: string, newTask: ITask): ITask;
+  updateTask(boardId: string, taskId: string, newTask: ITask): ITask | undefined;
   deleteTask(boardId: string, taskId: string): boolean;
 }
 
@@ -24,7 +24,7 @@ class TaskService implements ITaskService {
     return this.db.tacks.filter((t) => t.boardId === boardId);
   }
 
-  getTaskById(boardId: string, taskId: string): ITask {
+  getTaskById(boardId: string, taskId: string): ITask | undefined {
     return this.db.tacks.find((t) => t.id === taskId);
   }
 
@@ -33,13 +33,14 @@ class TaskService implements ITaskService {
     return task;
   }
 
-  updateTask(boardId: string, taskId: string, newTask: ITask): ITask {
+  updateTask(boardId: string, taskId: string, newTask: ITask): ITask | undefined{
     const thisTask = this.db.tacks.find((t) => t.id === taskId);
     const { title, order, description } = newTask;
-    thisTask.title = title;
-    thisTask.order = order;
-    thisTask.description = description;
-
+    if (thisTask) {
+      thisTask.title = title;
+      thisTask.order = order;
+      thisTask.description = description;
+    }
     return thisTask;
   }
 

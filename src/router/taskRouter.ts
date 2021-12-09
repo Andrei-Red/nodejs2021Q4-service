@@ -1,23 +1,24 @@
-const RouterTask = require('koa-router');
+import { Context } from 'koa';
+import Router from 'koa-router'
 
-const routerTask = new RouterTask();
+const routerTask = new Router();
 const TaskService = require('../service/taskService');
 const Task = require('../models/Task');
 
 const taskService = new TaskService();
 
-routerTask.get('/boards/:boardId/tasks', async (ctx) => {
+routerTask.get('/boards/:boardId/tasks', async (ctx: Context) => {
   try {
     const {boardId} = ctx.params;
     ctx.body = taskService.getTasks(boardId);
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
-    ctx.body = { message: e.message };
+    ctx.body = { message: (e as Error).message };
   }
 });
 
-routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx) => {
+routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
     const {boardId} = ctx.params;
     const {taskId} = ctx.params;
@@ -32,11 +33,11 @@ routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx) => {
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
-    ctx.body = { message: e.message };
+    ctx.body = { message: (e as Error).message };
   }
 });
 
-routerTask.post('/boards/:boardId/tasks', async (ctx) => {
+routerTask.post('/boards/:boardId/tasks', async (ctx: Context) => {
   try {
     const tasksData = ctx.request.body;
     tasksData.boardId = ctx.params.boardId
@@ -48,11 +49,11 @@ routerTask.post('/boards/:boardId/tasks', async (ctx) => {
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
-    ctx.body = { message: e.message };
+    ctx.body = { message: (e as Error).message };
   }
 });
 
-routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx) => {
+routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
     const {boardId} = ctx.params;
     const {taskId} = ctx.params;
@@ -63,11 +64,11 @@ routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx) => {
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
-    ctx.body = { message: e.message };
+    ctx.body = { message: (e as Error).message };
   }
 });
 
-routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx) => {
+routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
     const {boardId} = ctx.params;
     const {taskId} = ctx.params;
@@ -83,7 +84,7 @@ routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx) => {
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
-    ctx.body = { message: e.message };
+    ctx.body = { message: (e as Error).message };
   }
 });
 
