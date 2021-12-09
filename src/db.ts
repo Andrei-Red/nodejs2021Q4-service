@@ -1,3 +1,11 @@
+// interface ITrelloDB {
+//   users:
+// }
+//
+// interface IUser {
+//
+// }
+
 const trelloDB = {
   users: [],
   boards: [],

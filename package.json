@@ -7,9 +7,10 @@
   },
   "type": "commonjs",
   "description": "REST service starter for RS School",
-  "main": "src/server.js",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "nodemon src/server.ts",
+    "start:ts": "tsc && nodemon dist/server.js",
     "lint": "eslint --ext .js,.ts --fix src/",
     "lint:fix": "eslint --fix --ext .js.",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
@@ -45,6 +46,7 @@
     ]
   },
   "dependencies": {
+    "@types/koa": "^2.13.4",
     "cross-env": "7.0.3",
     "dotenv": "10.0.0",
     "koa": "^2.13.4",
@@ -56,10 +58,12 @@
     "yamljs": "0.3.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
     "chai": "4.3.4",
     "debug": "4.3.2",
     "dirty-chai": "2.0.1",
-    "eslint": "8.2.0",
+    "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.25.3",
@@ -70,6 +74,7 @@
     "lint-staged": "12.0.3",
     "nodemon": "2.0.15",
     "prettier": "2.4.1",
-    "supertest": "6.1.6"
+    "supertest": "6.1.6",
+    "typescript": "^4.5.2"
   }
 }
