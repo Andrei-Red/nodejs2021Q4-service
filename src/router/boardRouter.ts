@@ -1,6 +1,6 @@
-const Router = require('koa-router');
+const RouterBoard = require('koa-router');
 
-const routerBoard = new Router();
+const routerBoard = new RouterBoard();
 const Board = require('../models/Board')
 const BoardService = require('../service/boarderService')
 
@@ -79,20 +79,4 @@ routerBoard.delete('/boards/:id', async (ctx) => {
   }
 })
 
-
-// routerBoard.get('/boards/:boardId/tasks', async (ctx) => {
-//   try {
-//     console.log('ctx.params.boardId0', ctx.params.boardId);
-//     // const boardId = ctx.params.id
-//     // ctx.body = taskService.getTasks(boardId);
-//   } catch (e) {
-//     ctx.response.status = 500;
-//     console.error(e);
-//     ctx.body = { message: e.message };
-//   }
-// })
-
-
-
-
-module.exports = routerBoard
+module.exports = { routerBoard }

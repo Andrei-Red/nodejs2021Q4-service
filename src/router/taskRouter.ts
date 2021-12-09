@@ -1,6 +1,6 @@
-const Router = require('koa-router');
+const RouterTask = require('koa-router');
 
-const routerTask = new Router();
+const routerTask = new RouterTask();
 const TaskService = require('../service/taskService');
 const Task = require('../models/Task');
 
@@ -87,4 +87,4 @@ routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx) => {
   }
 });
 
-module.exports = routerTask;
+module.exports = { routerTask };

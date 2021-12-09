@@ -1,8 +1,8 @@
-const Router = require('koa-router');
+const RouterUser = require('koa-router');
 const UserService = require('../service/userService');
 const UserRouter = require('../models/User');
 
-const routerUser = new Router();
+const routerUser = new RouterUser();
 const userService = new UserService();
 
 routerUser.get('/users', async (ctx) => {
@@ -78,4 +78,4 @@ routerUser.delete('/users/:id', async (ctx) => {
   }
 });
 
-module.exports = routerUser;
+module.exports = { routerUser };
