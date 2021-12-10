@@ -1,5 +1,3 @@
-import { IColumn } from './Column';
-
 const { v4 } = require('uuid');
 
 export interface IBoard {
