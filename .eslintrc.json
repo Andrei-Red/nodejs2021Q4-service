@@ -19,7 +19,7 @@
     "noInlineConfig": true,
     "import/resolver": {
       "node": {
-        "extensions": [".ts"],
+        "extensions": [".ts", ".js"],
         "moduleDirectory": ["node_modules", "src/"]
       }
     }

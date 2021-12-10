@@ -1,20 +1,45 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
     "noImplicitAny": true,
     "strict": true,
-    "moduleResolution": "node",
+
+    "alwaysStrict": true,
+    "target": "ES6",
+    "module": "commonjs",
+    "removeComments": true,
+    "sourceMap": true,
     "esModuleInterop": true,
-    "target": "ES2021",
-    "module": "ES2020",
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
-//    "include": [
-//      "src/**/*"
-//    ],
-//    "exclude": [
-//      "node_modules"
-//    ]
-  }
+    "outDir": "dist",
+    "noUnusedLocals": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
+
+
+
+
+
+
+
+
+//{
+//  "compileOnSave": false,
+//  "compilerOptions": {
+//    "noImplicitAny": true,
+//    "strict": true,
+//    "moduleResolution": "node",
+//    "esModuleInterop": true,
+//    "target": "ES2021",
+//    "module": "ES2020",
+//    "typeRoots": [
+//      "./node_modules/@types"
+//    ]
+////    "include": [
+////      "src/**/*"
+////    ],
+////    "exclude": [
+////      "node_modules"
+////    ]
+//  }
+//}
