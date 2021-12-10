@@ -26,7 +26,6 @@
     "plugin:import/typescript"
   ],
   "rules": {
-    "no-explicit-any": 2,
     "import/extensions": "off",
     "linebreak-style": "off",
     "node/no-unsupported-features/es-syntax": "off",
