@@ -5,7 +5,7 @@
 
     "alwaysStrict": true,
     "target": "ES6",
-    "module": "commonjs",
+    "module": "CommonJS",
     "removeComments": true,
     "sourceMap": true,
     "esModuleInterop": true,

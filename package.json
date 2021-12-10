@@ -7,9 +7,9 @@
   },
   "type": "commonjs",
   "description": "REST service starter for RS School",
-  "main": "src/server.js",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "nodemon src/server.ts",
     "start:ts": "tsc && nodemon dict/server.js",
     "lint": "eslint --ext .js,.ts --fix src/",
     "lint:fix": "eslint --fix --ext .js.",
@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@types/koa": "^2.13.4",
+    "@types/koa-bodyparser": "^4.3.4",
     "chai": "4.3.4",
     "debug": "4.3.2",
     "dirty-chai": "2.0.1",
