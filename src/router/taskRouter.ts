@@ -1,5 +1,6 @@
-const Router = require('koa-router');
 import { Context } from 'koa';
+
+const Router = require('koa-router');
 
 const routerTask = new Router();
 const TaskService = require('../service/taskService');

@@ -44,8 +44,8 @@ class TaskService implements ITaskService {
       thisTask.title = title;
       thisTask.order = order;
       thisTask.description = description;
-      return thisTask;
     }
+    return thisTask;
   }
 
   deleteTask(boardId: string, taskId: string) {

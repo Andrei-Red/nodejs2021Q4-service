@@ -9,8 +9,11 @@ export interface IUser {
 
 class User implements IUser {
   id: string;
+
   name: string;
+
   login: string;
+
   password: string;
 
   constructor(user: IUser = {} as IUser) {

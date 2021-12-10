@@ -1,5 +1,6 @@
-const Router = require('koa-router');
 import { Context } from 'koa';
+
+const Router = require('koa-router');
 
 const routerBoard = new Router();
 const Board = require('../models/Board');

@@ -40,8 +40,8 @@ class UserService implements IUserService {
     if (user) {
       user.name = newUser.name;
       user.login = newUser.login;
-      return user;
     }
+    return user;
   }
 
   deleteUser(id: string) {

@@ -1,5 +1,6 @@
-const Router = require('koa-router');
 import { Context } from 'koa';
+
+const Router = require('koa-router');
 const UserService = require('../service/userService');
 const UserRouter = require('../models/User');
 

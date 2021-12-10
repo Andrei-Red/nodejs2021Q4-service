@@ -39,8 +39,8 @@ class BoarderService implements IBoarderService {
     if (board) {
       board.title = newBoard.title;
       board.columns = newBoard.columns;
-      return board;
     }
+    return board;
   }
 
   deleteBoard(id: string) {
