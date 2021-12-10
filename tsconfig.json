@@ -1,6 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "noImplicitAny": true,
+    "strict": true,
+
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -12,10 +15,9 @@
     "module": "commonjs",
     "typeRoots": [
       "./node_modules/@types"
-    ],
+    ]
 //    "noImplicitReturns": true,
 //    "noFallthroughCasesInSwitch": true,
-//    "noImplicitAny": true,
 //    "noImplicitThis": true,
 //    "noUnusedParameters": true,
 //    "forceConsistentCasingInFileNames": true,
