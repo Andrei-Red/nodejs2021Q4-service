@@ -19,7 +19,8 @@
     "noInlineConfig": true,
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".ts"],
+        "moduleDirectory": ["node_modules", "src/"]
       }
     }
   },
@@ -36,6 +37,7 @@
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
-    "@typescript-eslint/no-var-requires": 0
+    "@typescript-eslint/no-var-requires": 0,
+    "no-unused-vars": 0
   }
 }
