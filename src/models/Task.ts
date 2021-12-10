@@ -10,7 +10,7 @@ export interface ITask {
   columnId: string | null;
 }
 
-class Task implements ITask {
+export class Task implements ITask {
   id: string;
 
   title: string;
@@ -35,5 +35,3 @@ class Task implements ITask {
     this.columnId = task.columnId;
   }
 }
-
-module.exports = Task;
