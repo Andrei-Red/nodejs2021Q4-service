@@ -19,8 +19,6 @@
     "noInlineConfig": true
   },
   "extends": [
-//    "eslint:recommended",
-//    "plugin:node/recommended",
     "airbnb-base",
     "prettier",
     "eslint:recommended",

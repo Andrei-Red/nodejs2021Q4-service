@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const koa_1 = __importDefault(require("koa"));
+const koa_body_1 = __importDefault(require("koa-body"));
+const config_1 = require("./common/config");
+const userRouter_1 = require("./router/userRouter");
+const boardRouter_1 = require("./router/boardRouter");
+const taskRouter_1 = require("./router/taskRouter");
+const server = new koa_1.default();
+server.use((0, koa_body_1.default)());
+server.use(userRouter_1.routerUser.routes());
+server.use(userRouter_1.routerUser.allowedMethods());
+server.use(boardRouter_1.routerBoard.routes());
+server.use(boardRouter_1.routerBoard.allowedMethods());
+server.use(taskRouter_1.routerTask.routes());
+server.use(taskRouter_1.routerTask.allowedMethods());
+server.listen(config_1.config.PORT, () => console.log(`App is running on http://localhost:${config_1.config.PORT}`));
