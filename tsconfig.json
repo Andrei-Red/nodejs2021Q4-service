@@ -3,25 +3,12 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "strict": true,
-
-    "sourceMap": true,
-    "declaration": false,
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
     "typeRoots": [
       "./node_modules/@types"
     ]
-//    "noImplicitReturns": true,
-//    "noFallthroughCasesInSwitch": true,
-//    "noImplicitThis": true,
-//    "noUnusedParameters": true,
-//    "forceConsistentCasingInFileNames": true,
-//    "allowJs": true,
-//    "strictNullChecks": false
   }
 }
