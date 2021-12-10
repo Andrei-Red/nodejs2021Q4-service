@@ -19,12 +19,13 @@
     "noInlineConfig": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:node/recommended",
+//    "eslint:recommended",
+//    "plugin:node/recommended",
     "airbnb-base",
     "prettier",
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript"
   ],
   "rules": {
     "no-explicit-any": 2,

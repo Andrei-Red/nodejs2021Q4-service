@@ -1,21 +1,20 @@
-import { TTrelloDB } from '../db';
+import { TTrelloDB , db } from '../db';
 import { IUser } from '../models/User';
 import { ITask } from '../models/Task';
 
-const db = require('../db');
 
 interface IUserService {
   db: TTrelloDB;
 
-  getUsers(): IUser[]
+  getUsers(): IUser[];
   getUsersById(id: string): IUser | undefined;
   addUser(user: IUser): IUser;
-  updateUser(id: string, newUser: IUser): IUser | undefined ;
+  updateUser(id: string, newUser: IUser): IUser | undefined;
   deleteUser(id: string): boolean;
-  _updateUserIdInTacks(userId: string): void
+  _updateUserIdInTacks(userId: string): void;
 }
 
-class UserService implements IUserService{
+export class UserService implements IUserService {
   db: TTrelloDB;
 
   constructor() {
@@ -37,7 +36,7 @@ class UserService implements IUserService{
 
   updateUser(id: string, newUser: IUser): IUser | undefined {
     const user = this.db.users.find((u: IUser) => u.id === id);
-    if(user) {
+    if (user) {
       user.name = newUser.name;
       user.login = newUser.login;
     }
@@ -67,5 +66,3 @@ class UserService implements IUserService{
     });
   }
 }
-
-module.exports = UserService;

@@ -3,23 +3,23 @@ import { IColumn } from './Column';
 const { v4 } = require('uuid');
 
 export interface IBoard {
-  id: string,
-  title: string,
-  columns: IColumn[]
+  id: string;
+  title: string;
+  columns: [];
 }
 
-class Board implements IBoard {
-  id: string
+export class Board implements IBoard {
+  id: string;
 
-  title: string
+  title: string;
 
-  columns
+  columns;
 
   constructor(board = {} as IBoard) {
-      this.id =  v4();
-      this.title = board.title;
-      this.columns = board.columns
+    this.id = v4();
+    this.title = board.title;
+    this.columns = board.columns;
   }
 }
 
-module.exports = Board
+module.exports = Board;

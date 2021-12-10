@@ -1,10 +1,10 @@
 import { Context } from 'koa';
-import Router from 'koa-router'
+import Router from 'koa-router';
 
-const UserService = require('../service/userService');
-const UserRouter = require('../models/User');
+import { UserService } from '../service/userService';
+import { IUser, User } from '../models/User';
 
-const routerUser = new Router();
+export const routerUser = new Router();
 const userService = new UserService();
 
 routerUser.get('/users', async (ctx: Context) => {
@@ -37,9 +37,9 @@ routerUser.get('/users/:id', async (ctx: Context) => {
 routerUser.post('/users', async (ctx: Context) => {
   try {
     const userData = ctx.request.body;
-    const user = new UserRouter(userData);
-    const userDataToResponse = UserRouter.toResponse(user)
-    userService.addUser(userDataToResponse);
+    const user = new User(userData);
+    const userDataToResponse = User.toResponse(user);
+    userService.addUser(userDataToResponse as IUser);
     ctx.response.status = 201;
     ctx.body = userDataToResponse;
   } catch (e) {
@@ -79,5 +79,3 @@ routerUser.delete('/users/:id', async (ctx: Context) => {
     ctx.body = { message: (e as Error).message };
   }
 });
-
-module.exports = { routerUser };

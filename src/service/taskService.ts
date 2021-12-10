@@ -1,7 +1,6 @@
-import { TTrelloDB } from '../db';
+import { TTrelloDB , db } from '../db';
 import { ITask } from '../models/Task';
 
-const db = require('../db');
 
 interface ITaskService {
   db: TTrelloDB;
@@ -9,11 +8,15 @@ interface ITaskService {
   getTasks(boardId: string): ITask[];
   getTaskById(boardId: string, taskId: string): ITask | undefined;
   addTask(task: ITask): ITask;
-  updateTask(boardId: string, taskId: string, newTask: ITask): ITask | undefined;
+  updateTask(
+    boardId: string,
+    taskId: string,
+    newTask: ITask
+  ): ITask | undefined;
   deleteTask(boardId: string, taskId: string): boolean;
 }
 
-class TaskService implements ITaskService {
+export class TaskService implements ITaskService {
   db: TTrelloDB;
 
   constructor() {
@@ -33,7 +36,11 @@ class TaskService implements ITaskService {
     return task;
   }
 
-  updateTask(boardId: string, taskId: string, newTask: ITask): ITask | undefined{
+  updateTask(
+    boardId: string,
+    taskId: string,
+    newTask: ITask
+  ): ITask | undefined {
     const thisTask = this.db.tacks.find((t) => t.id === taskId);
     const { title, order, description } = newTask;
     if (thisTask) {
@@ -53,5 +60,3 @@ class TaskService implements ITaskService {
     return false;
   }
 }
-
-module.exports = TaskService;

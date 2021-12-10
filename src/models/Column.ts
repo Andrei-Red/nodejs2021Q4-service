@@ -6,7 +6,7 @@ export interface IColumn {
   order: number;
 }
 
-class Column implements IColumn {
+export class Column implements IColumn {
   id: string;
 
   title: string;
@@ -19,5 +19,3 @@ class Column implements IColumn {
     this.order = column.order;
   }
 }
-
-module.exports = Column;

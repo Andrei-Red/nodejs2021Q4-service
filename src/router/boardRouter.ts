@@ -1,11 +1,11 @@
 import { Context } from 'koa';
-import Router from 'koa-router'
+import Router from 'koa-router';
+import { BoarderService } from '../service/boarderService';
+import { Board } from '../models/Board';
 
-const routerBoard = new Router();
-const Board = require('../models/Board');
-const BoardService = require('../service/boarderService');
+export const routerBoard = new Router();
 
-const boardService = new BoardService();
+const boardService = new BoarderService();
 
 routerBoard.get('/boards', async (ctx: Context) => {
   try {
@@ -78,5 +78,3 @@ routerBoard.delete('/boards/:id', async (ctx: Context) => {
     ctx.body = { message: (e as Error).message };
   }
 });
-
-module.exports = { routerBoard };

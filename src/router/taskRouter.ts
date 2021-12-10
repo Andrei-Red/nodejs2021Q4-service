@@ -1,15 +1,15 @@
 import { Context } from 'koa';
-import Router from 'koa-router'
+import Router from 'koa-router';
+import { TaskService } from '../service/taskService';
+import { Task } from '../models/Task';
 
-const routerTask = new Router();
-const TaskService = require('../service/taskService');
-const Task = require('../models/Task');
+export const routerTask = new Router();
 
 const taskService = new TaskService();
 
 routerTask.get('/boards/:boardId/tasks', async (ctx: Context) => {
   try {
-    const {boardId} = ctx.params;
+    const { boardId } = ctx.params;
     ctx.body = taskService.getTasks(boardId);
   } catch (e) {
     ctx.response.status = 500;
@@ -20,8 +20,8 @@ routerTask.get('/boards/:boardId/tasks', async (ctx: Context) => {
 
 routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
-    const {boardId} = ctx.params;
-    const {taskId} = ctx.params;
+    const { boardId } = ctx.params;
+    const { taskId } = ctx.params;
 
     const task = taskService.getTaskById(boardId, taskId);
     if (task) {
@@ -40,7 +40,7 @@ routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
 routerTask.post('/boards/:boardId/tasks', async (ctx: Context) => {
   try {
     const tasksData = ctx.request.body;
-    tasksData.boardId = ctx.params.boardId
+    tasksData.boardId = ctx.params.boardId;
     const task = new Task(tasksData);
 
     taskService.addTask(task);
@@ -55,10 +55,10 @@ routerTask.post('/boards/:boardId/tasks', async (ctx: Context) => {
 
 routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
-    const {boardId} = ctx.params;
-    const {taskId} = ctx.params;
+    const { boardId } = ctx.params;
+    const { taskId } = ctx.params;
     const taskData = ctx.request.body;
-    taskData.boardId = boardId
+    taskData.boardId = boardId;
 
     ctx.body = taskService.updateTask(boardId, taskId, taskData);
   } catch (e) {
@@ -70,8 +70,8 @@ routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
 
 routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
-    const {boardId} = ctx.params;
-    const {taskId} = ctx.params;
+    const { boardId } = ctx.params;
+    const { taskId } = ctx.params;
 
     const isTaskDeleted = taskService.deleteTask(boardId, taskId);
 
@@ -87,5 +87,3 @@ routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
     ctx.body = { message: (e as Error).message };
   }
 });
-
-module.exports = { routerTask };

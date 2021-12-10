@@ -1,7 +1,6 @@
-import { TTrelloDB } from '../db';
+import { TTrelloDB , db } from '../db';
 import { IBoard } from '../models/Board';
 
-const db = require('../db');
 
 interface IBoarderService {
   db: TTrelloDB;
@@ -9,12 +8,12 @@ interface IBoarderService {
   getBoard(): IBoard[];
   getBoardById(id: string): IBoard | undefined;
   addBoard(board: IBoard): IBoard;
-  updateBoard(id: string, newBoard: IBoard): IBoard | undefined ;
+  updateBoard(id: string, newBoard: IBoard): IBoard | undefined;
   deleteBoard(id: string): boolean;
   _deleteBoardSTacks(id: string): void;
 }
 
-class BoarderService implements IBoarderService {
+export class BoarderService implements IBoarderService {
   db: TTrelloDB;
 
   constructor() {
@@ -55,5 +54,3 @@ class BoarderService implements IBoarderService {
     this.db.tacks = this.db.tacks.filter((t) => t.boardId !== id);
   }
 }
-
-module.exports = BoarderService;
