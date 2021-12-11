@@ -7,14 +7,13 @@ interface ITaskService {
   db: TTrelloDB;
 
   getTasks(boardId: string): ITask[];
-  getTaskById(boardId: string, taskId: string): ITask | undefined;
+  getTaskById(taskId: string): ITask | undefined;
   addTask(task: ITask): ITask;
   updateTask(
-    boardId: string,
     taskId: string,
     newTask: ITask
   ): ITask | undefined;
-  deleteTask(boardId: string, taskId: string): boolean;
+  deleteTask(taskId: string): boolean;
 }
 
 class TaskService implements ITaskService {
@@ -28,8 +27,7 @@ class TaskService implements ITaskService {
     return this.db.tacks.filter((t) => t.boardId === boardId);
   }
 
-  getTaskById(boardId: string, taskId: string) {
-    boardId = '';
+  getTaskById(taskId: string) {
     return this.db.tacks.find((t: ITask) => t.id === taskId);
   }
 
@@ -38,8 +36,7 @@ class TaskService implements ITaskService {
     return task;
   }
 
-  updateTask(boardId: string, taskId: string, newTask: ITask) {
-    boardId = '';
+  updateTask(taskId: string, newTask: ITask) {
     const thisTask = this.db.tacks.find((t: ITask) => t.id === taskId);
     const { title, order, description } = newTask;
     if (thisTask) {
@@ -50,8 +47,7 @@ class TaskService implements ITaskService {
     return thisTask;
   }
 
-  deleteTask(boardId: string, taskId: string) {
-    boardId = '';
+  deleteTask(taskId: string) {
     const taskIndex = this.db.tacks.findIndex((t) => t.id === taskId);
     if (taskIndex !== -1) {
       this.db.tacks.splice(taskIndex, 1);

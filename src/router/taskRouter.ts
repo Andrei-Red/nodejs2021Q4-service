@@ -21,10 +21,9 @@ routerTask.get('/boards/:boardId/tasks', async (ctx: Context) => {
 
 routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
-    const { boardId } = ctx['params'];
     const { taskId } = ctx['params'];
 
-    const task = taskService.getTaskById(boardId, taskId);
+    const task = taskService.getTaskById(taskId);
     if (task) {
       ctx.body = task;
     } else {
@@ -56,12 +55,10 @@ routerTask.post('/boards/:boardId/tasks', async (ctx: Context) => {
 
 routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
-    const { boardId } = ctx['params'];
     const { taskId } = ctx['params'];
     const taskData = ctx.request.body;
-    taskData.boardId = boardId;
 
-    ctx.body = taskService.updateTask(boardId, taskId, taskData);
+    ctx.body = taskService.updateTask(taskId, taskData);
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
@@ -71,10 +68,9 @@ routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
 
 routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
-    const { boardId } = ctx['params'];
     const { taskId } = ctx['params'];
 
-    const isTaskDeleted = taskService.deleteTask(boardId, taskId);
+    const isTaskDeleted = taskService.deleteTask(taskId);
 
     if (isTaskDeleted) {
       ctx.response.status = 204;
