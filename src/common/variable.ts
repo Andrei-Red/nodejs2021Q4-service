@@ -1,1 +1,1 @@
-const PORT = 4000
+export const PORT: number = 4000

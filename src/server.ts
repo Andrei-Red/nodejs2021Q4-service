@@ -1,9 +1,7 @@
-import { config } from "./common/config";
-
+import { PORT } from './common/variable';
 const json = require('koa-json');
 const Koa = require('koa');
 const koaBody = require('koa-body')
-// const { PORT } = require('./common/config');
 const routerUser = require('./router/userRouter');
 const routerBoard = require('./router/boardRouret');
 const routerTask = require('./router/taskRouter');
@@ -20,6 +18,6 @@ server.use(routerBoard.allowedMethods())
 server.use(routerTask.routes())
 server.use(routerTask.allowedMethods())
 
-server.listen(config['PORT'], () =>
-  console.log(`App is running on http://localhost:${config.PORT}`)
+server.listen(PORT, () =>
+  console.log(`App is running on http://localhost:${PORT}`)
 );
