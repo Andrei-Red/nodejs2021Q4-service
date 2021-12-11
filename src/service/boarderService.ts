@@ -21,19 +21,48 @@ class BoarderService implements IBoarderService {
     this.db = db;
   }
 
+
+  /**
+   * Getting all Boards.
+   *
+   * @returns Array Boards of type IBoard
+   *
+   */
   getBoard() {
     return this.db.boards;
   }
 
+  /**
+   * Getting a Board by ID.
+   *
+   * @param id - The first input string. it is ID Board
+   * @returns Board of type IBoard
+   *
+   */
   getBoardById(id: string) {
     return this.db.boards.find((u) => u.id === id);
   }
 
+  /**
+   * Add a Board to Boards Array.
+   *
+   * @param board - The first input IBoard
+   * @returns Board of type IBoard or undefined if Board not found
+   *
+   */
   addBoard(board: IBoard) {
     this.db.boards.push(board);
     return board;
   }
 
+  /**
+   * Update a Board to Boards Array.
+   *
+   * @param id - The first input string
+   * @param newBoard - The second input IBoard
+   * @returns Board of type IBoard or undefined if Board not found
+   *
+   */
   updateBoard(id: string, newBoard: IBoard) {
     const board = this.db.boards.find((u: IBoard) => u.id === id);
     if (board) {
@@ -43,6 +72,13 @@ class BoarderService implements IBoarderService {
     return board;
   }
 
+  /**
+   * Delete a Board to Boards Array.
+   *
+   * @param id - The first input string
+   * @returns Boolean true if a good action else false
+    *
+   */
   deleteBoard(id: string) {
     const boardIndex = this.db.boards.findIndex((b: IBoard) => b.id === id);
     if (boardIndex !== -1) {
@@ -52,7 +88,13 @@ class BoarderService implements IBoarderService {
     }
     return false;
   }
-
+  /**
+   * Delete Boards in Tasks Array.
+   *
+   * @param id - The first input string
+   * @returns void
+   *
+   */
   _deleteBoardSTacks(id: string) {
     this.db.tacks = this.db.tacks.filter((t) => t.boardId !== id);
   }

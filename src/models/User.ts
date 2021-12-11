@@ -20,6 +20,13 @@ class User implements IUser {
     this.password = user.password;
   }
 
+  /**
+   * Getting user data without password.
+   *
+   * @param user - The first input IUser
+   * @returns Object as IUser without password
+   *
+   */
   static toResponse(user: IUser) {
     const { id, name, login } = user;
     return { id, name, login };

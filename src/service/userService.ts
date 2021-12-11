@@ -22,19 +22,47 @@ class UserService implements IUserService {
     this.db = db;
   }
 
+  /**
+   * Getting all Users in Users Array.
+   *
+   * @returns Array Users of type IUser
+   *
+   */
   getUsers() {
     return this.db.users;
   }
 
+  /**
+   * Getting the User by User in in Users Array.
+   *
+   * @param id - The first input string. it is User ID
+   * @returns Array Users of type IUser or undefined if User not found
+   *
+   */
   getUsersById(id: string) {
     return this.db.users.find((u) => u.id === id);
   }
 
+  /**
+   * Add the User to Users Array.
+   *
+   * @param user - The first input IBoard
+   * @returns User Users of type IUser
+   *
+   */
   addUser(user: IUser) {
     this.db.users.push(user);
     return user;
   }
 
+  /**
+   * Update the User in Users Array.
+   *
+   * @param id - The first input string
+   * @param newUser - The second input IUser
+   * @returns User Users of type IUser or undefined if User not found
+   *
+   */
   updateUser(id: string, newUser: IUser) {
     const user = this.db.users.find((u: IUser) => u.id === id);
     if (user) {
@@ -44,6 +72,13 @@ class UserService implements IUserService {
     return user;
   }
 
+  /**
+   * Delete the User to Users Array.
+   *
+   * @param id - The first input string
+   * @returns Boolean true if a good action else false
+   *
+   */
   deleteUser(id: string) {
     const userIndex = this.db.users.findIndex((u: IUser) => u.id === id);
     if (userIndex !== -1) {
@@ -54,6 +89,13 @@ class UserService implements IUserService {
     return false;
   }
 
+  /**
+   * Update userId field in User. Set null value.
+   *
+   * @param userId - The first input string
+   * @returns Void
+   *
+   */
   _updateUserIdInTacks(userId: string) {
     function setNullValue(value: ITask) {
       const theValue = value;

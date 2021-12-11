@@ -11,8 +11,6 @@
     "esModuleInterop": true,
     "outDir": "dist",
     "noUnusedLocals": true,
-
-    "allowJs": false,
     "moduleResolution": "node"
   },
   "include": ["src/**/*"],
