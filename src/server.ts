@@ -1,7 +1,8 @@
 const json = require('koa-json');
 const Koa = require('koa');
 const koaBody = require('koa-body')
-const config = require('./common/config');
+// const config = require('./common/config');
+import { config } from './common/config'
 
 const routerUser = require('./router/userRouter')
 const routerBoard = require('./router/boardRouret')
