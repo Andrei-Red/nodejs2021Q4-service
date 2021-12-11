@@ -5,5 +5,4 @@ models
 router
 service
 server.ts
-db.ts
 common
