@@ -6,4 +6,5 @@ router
 service
 server.ts
 variable.ts
+db.ts
 config.ts
