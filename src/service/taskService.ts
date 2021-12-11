@@ -29,6 +29,7 @@ class TaskService implements ITaskService {
   }
 
   getTaskById(boardId: string, taskId: string) {
+    boardId = '';
     return this.db.tacks.find((t: ITask) => t.id === taskId);
   }
 
@@ -38,6 +39,7 @@ class TaskService implements ITaskService {
   }
 
   updateTask(boardId: string, taskId: string, newTask: ITask) {
+    boardId = '';
     const thisTask = this.db.tacks.find((t: ITask) => t.id === taskId);
     const { title, order, description } = newTask;
     if (thisTask) {
@@ -49,6 +51,7 @@ class TaskService implements ITaskService {
   }
 
   deleteTask(boardId: string, taskId: string) {
+    boardId = '';
     const taskIndex = this.db.tacks.findIndex((t) => t.id === taskId);
     if (taskIndex !== -1) {
       this.db.tacks.splice(taskIndex, 1);

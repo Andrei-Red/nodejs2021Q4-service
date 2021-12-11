@@ -19,7 +19,7 @@ routerUser.get('/users', async (ctx: Context) => {
 
 routerUser.get('/users/:id', async (ctx: Context) => {
   try {
-    const userId = ctx.params.id;
+    const userId = ctx['params'].id;
     const user = userService.getUsersById(userId);
     if (user) {
       ctx.body = user;
@@ -52,7 +52,7 @@ routerUser.post('/users', async (ctx: Context) => {
 routerUser.put('/users/:id', async (ctx: Context) => {
   try {
     const userData = ctx.request.body;
-    const userId = ctx.params.id;
+    const userId = ctx['params'].id;
 
     ctx.body = userService.updateUser(userId, userData);
   } catch (e) {
@@ -64,7 +64,7 @@ routerUser.put('/users/:id', async (ctx: Context) => {
 
 routerUser.delete('/users/:id', async (ctx: Context) => {
   try {
-    const userId = ctx.params.id;
+    const userId = ctx['params'].id;
 
     const isUserDeleted = userService.deleteUser(userId);
     if (isUserDeleted) {
