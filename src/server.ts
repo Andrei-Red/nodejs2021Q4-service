@@ -19,6 +19,6 @@ server.use(routerBoard.allowedMethods())
 server.use(routerTask.routes())
 server.use(routerTask.allowedMethods())
 
-server.listen(config["PORT"], () =>
-  console.log(`App is running on http://localhost:${config["PORT"]}`)
+server.listen(config['PORT'], () =>
+  console.log(`App is running on http://localhost:${config['PORT']}`)
 );
