@@ -20,7 +20,7 @@ routerBoard.get('/boards', async (ctx: Context) => {
 
 routerBoard.get('/boards/:id', async (ctx: Context) => {
   try {
-    const boardId = ctx.params.id;
+    const boardId = ctx['params'].id;
     const board = boardService.getBoardById(boardId);
     if (board) {
       ctx.body = board;
@@ -52,7 +52,7 @@ routerBoard.post('/boards', async (ctx: Context) => {
 routerBoard.put('/boards/:id', async (ctx: Context) => {
   try {
     const boardData = ctx.request.body;
-    const boardsId = ctx.params.id;
+    const boardsId = ctx['params'].id;
 
     ctx.body = boardService.updateBoard(boardsId, boardData);
   } catch (e) {
@@ -64,7 +64,7 @@ routerBoard.put('/boards/:id', async (ctx: Context) => {
 
 routerBoard.delete('/boards/:id', async (ctx: Context) => {
   try {
-    const boardsId = ctx.params.id;
+    const boardsId = ctx['params'].id;
 
     const isBoardDeleted = boardService.deleteBoard(boardsId);
     if (isBoardDeleted) {
