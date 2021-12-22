@@ -1,8 +1,3 @@
 test/
 dist
 node_module
-models
-router
-service
-server.ts
-db.ts
