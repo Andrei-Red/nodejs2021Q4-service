@@ -12,6 +12,7 @@ routerUser.get('/users', async (ctx: Context) => {
   try {
     ctx.body = userService.getUsers();
     logger.info(`Some message: statusCode: ${ctx.response.status}`, {statusCode: ctx.response.status} )
+    logger.error(`Some message: eRROR`, {statusCode: ctx.response.status} )
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);

@@ -1,40 +1,43 @@
+import { config } from "../common/config";
+import { levels } from './levelsConst';
+
 const { createLogger, transports, format } = require('winston');
 require('winston-daily-rotate-file');
-const { combine, timestamp, printf } = format;
 
-const levels = {
-  0: 'error',
-  1: 'warn',
-  2: 'info',
-  3: 'http',
-  4: 'verbose',
-  5: 'debug',
-  6: 'silly',
-};
+const level: string = levels[Number(config.LOGGING_LEVEL)]
 
-const myFormat = printf(({ level, message, timestamp, stack }: any) => {
-  return `${timestamp} ${level}: ${message || stack}`;
-});
-
-const transport = new transports.DailyRotateFile({
+const transportAll = new transports.DailyRotateFile({
   filename: 'logs/application-%DATE%.log',
   datePattern: 'YYYY-MM-DD-HH',
   zippedArchive: true,
   maxSize: '20m',
   maxFiles: '14d',
-  level: 'debug',
+  level: level,
 });
+
+const transportError = new transports.DailyRotateFile({
+  filename: 'logs/application-ERROR-%DATE%.log',
+  datePattern: 'YYYY-MM-DD-HH',
+  zippedArchive: true,
+  maxSize: '20m',
+  maxFiles: '14d',
+  level: 'error',
+});
+
 
 const logger = createLogger({
   level: 'info',
-  format: combine(
-    format.colorize(),
-    timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-    format.errors({ stack: true }),
-    myFormat
-  ),
+  format: format.json(),
   defaultMeta: { service: 'user-service' },
-  transports: [new transports.Console(), transport],
+  transports: [new transports.Console(), transportAll, transportError],
 });
 
 module.exports = logger;
+
+
+// combine(
+//   format.colorize(),
+//   timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+//   format.errors({ stack: true }),
+//   myFormat
+// ),

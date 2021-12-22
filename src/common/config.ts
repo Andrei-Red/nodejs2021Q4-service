@@ -11,6 +11,7 @@ type TConfig = {
     MONGO_CONNECTION_STRING: string;
     JWT_SECRET_KEY: string;
     AUTH_MODE: boolean | string;
+    LOGGING_LEVEL: string;
 }
 
 export const config: TConfig = {
@@ -19,5 +20,6 @@ export const config: TConfig = {
     MONGO_CONNECTION_STRING: process.env.PORT as string,
     JWT_SECRET_KEY: process.env.PORT as string,
     AUTH_MODE: process.env.PORT as string,
+    LOGGING_LEVEL: process.env.LOGGING_LEVEL as string
 } as TConfig
 
