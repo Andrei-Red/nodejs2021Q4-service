@@ -3,7 +3,7 @@ import { Context } from 'koa';
 const Router = require('koa-router');
 const UserService = require('../service/userService');
 const UserRouter = require('../models/User');
-const logger = require('../loggerManager/winstonLogger')
+const logger = require('../loggerManager/winstonLogger');
 
 const routerUser = new Router();
 const userService = new UserService();
@@ -11,12 +11,22 @@ const userService = new UserService();
 routerUser.get('/users', async (ctx: Context) => {
   try {
     ctx.body = userService.getUsers();
-    logger.info(`Some message: statusCode: ${ctx.response.status}`, {statusCode: ctx.response.status} )
-    logger.error(`Some message: eRROR`, {statusCode: ctx.response.status} )
+    logger.info('GET', {
+      url: ctx.url,
+      queryParameters: ctx.params,
+      body: ctx.body,
+      statusCode: ctx.response.status,
+    });
   } catch (e) {
     ctx.response.status = 500;
-    console.error(e);
     ctx.body = { message: (e as Error).message };
+
+    logger.error('GET', {
+      url: ctx.url,
+      queryParameters: ctx.params,
+      body: ctx.body,
+      statusCode: ctx.response.status,
+    });
   }
 });
 
@@ -30,10 +40,22 @@ routerUser.get('/users/:id', async (ctx: Context) => {
       ctx.response.status = 404;
       ctx.body = { message: `User not found by id: ${userId}` };
     }
+    logger.info('GET', {
+      url: ctx.url,
+      queryParameters: ctx.params,
+      body: ctx.body,
+      statusCode: ctx.response.status,
+    });
   } catch (e) {
     ctx.response.status = 500;
-    console.error(e);
     ctx.body = { message: (e as Error).message };
+
+    logger.error('GET', {
+      url: ctx.url,
+      queryParameters: ctx.params,
+      body: ctx.body,
+      statusCode: ctx.response.status,
+    });
   }
 });
 
@@ -45,10 +67,22 @@ routerUser.post('/users', async (ctx: Context) => {
     userService.addUser(userDataToResponse);
     ctx.response.status = 201;
     ctx.body = userDataToResponse;
+    logger.info('POST', {
+      url: ctx.url,
+      queryParameters: ctx.params,
+      body: ctx.body,
+      statusCode: ctx.response.status,
+    });
   } catch (e) {
     ctx.response.status = 500;
-    console.error(e);
     ctx.body = { message: (e as Error).message };
+
+    logger.error('GET', {
+      url: ctx.url,
+      queryParameters: ctx.params,
+      body: ctx.body,
+      statusCode: ctx.response.status,
+    });
   }
 });
 
@@ -58,10 +92,22 @@ routerUser.put('/users/:id', async (ctx: Context) => {
     const userId = ctx.params.id;
 
     ctx.body = userService.updateUser(userId, userData);
+    logger.info('PUT', {
+      url: ctx.url,
+      queryParameters: ctx.params,
+      body: ctx.body,
+      statusCode: ctx.response.status,
+    });
   } catch (e) {
     ctx.response.status = 500;
-    console.error(e);
     ctx.body = { message: (e as Error).message };
+
+    logger.error('GET', {
+      url: ctx.url,
+      queryParameters: ctx.params,
+      body: ctx.body,
+      statusCode: ctx.response.status,
+    });
   }
 });
 
@@ -76,10 +122,22 @@ routerUser.delete('/users/:id', async (ctx: Context) => {
       ctx.response.status = 400;
       ctx.body = { message: 'something went wrong' };
     }
+    logger.info('DELETE', {
+      url: ctx.url,
+      queryParameters: ctx.params,
+      body: ctx.body,
+      statusCode: ctx.response.status,
+    });
   } catch (e) {
     ctx.response.status = 500;
-    console.error(e);
     ctx.body = { message: (e as Error).message };
+
+    logger.error('GET', {
+      url: ctx.url,
+      queryParameters: ctx.params,
+      body: ctx.body,
+      statusCode: ctx.response.status,
+    });
   }
 });
 
