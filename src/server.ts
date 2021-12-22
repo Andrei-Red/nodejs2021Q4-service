@@ -6,23 +6,27 @@ const routerUser = require('./router/userRouter');
 const routerBoard = require('./router/boardRouret');
 const routerTask = require('./router/taskRouter');
 
-const server = new Koa()
+const { handlerError, handlerErrorAfterRouters, handlerCodeError } = require('./loggerManager/otherError')
 
-const { handlerError, handlerErrorAfterRouters } = require('./loggerManager/otherError')
+try {
+  const server = new Koa()
 
-server.use(handlerError)
-server.use(koaBody())
+  server.use(handlerError)
+  server.use(koaBody())
 
-server.use(routerUser.routes())
-server.use(routerUser.allowedMethods())
-server.use(routerBoard.routes())
-server.use(routerBoard.allowedMethods())
-server.use(routerTask.routes())
-server.use(routerTask.allowedMethods())
+  server.use(routerUser.routes())
+  server.use(routerUser.allowedMethods())
+  server.use(routerBoard.routes())
+  server.use(routerBoard.allowedMethods())
+  server.use(routerTask.routes())
+  server.use(routerTask.allowedMethods())
 
-server.use(handlerErrorAfterRouters)
+  server.use(handlerErrorAfterRouters)
 
 
-server.listen(config.PORT, () =>
-  console.log(`App is running on http://localhost:${config.PORT}`)
-);
+  server.listen(config.PORT, () =>
+    console.log(`App is running on http://localhost:${config.PORT}`)
+  );
+} catch (error) {
+  handlerCodeError(error)
+}

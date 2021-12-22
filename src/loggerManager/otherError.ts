@@ -1,13 +1,13 @@
 import { Context } from 'koa';
-const logger = require('./winstonLogger')
+const logger = require('./winstonLogger');
 
-const handlerError = async (ctx: Context, next: any) => {
+const handlerError = async (ctx: Context, next: () => void) => {
   try {
     await next();
   } catch (err: any) {
     ctx.status = err.statusCode || err.status || 500;
     ctx.body = {
-      message: err.message
+      message: err.message,
     };
 
     logger.error(err.message, {
@@ -17,11 +17,11 @@ const handlerError = async (ctx: Context, next: any) => {
       statusCode: ctx.status,
     });
   }
-}
+};
 
-const handlerErrorAfterRouters = async (ctx: Context, next: any) => {
+const handlerErrorAfterRouters = async (ctx: Context, next: () => void) => {
   try {
-    if(ctx.status >= 400) {
+    if (ctx.status >= 400) {
       logger.info('info', {
         url: ctx.url,
         queryParameters: ctx.params,
@@ -33,7 +33,7 @@ const handlerErrorAfterRouters = async (ctx: Context, next: any) => {
   } catch (err: any) {
     ctx.status = err.statusCode || err.status || 500;
     ctx.body = {
-      message: err.message
+      message: err.message,
     };
 
     logger.error(err.message, {
@@ -43,6 +43,10 @@ const handlerErrorAfterRouters = async (ctx: Context, next: any) => {
       statusCode: ctx.status,
     });
   }
+};
+
+const handlerCodeError = async (e: Error) => {
+  await logger.error(`code error: ${e}`);
 }
 
-module.exports = { handlerError, handlerErrorAfterRouters };
+module.exports = { handlerError, handlerErrorAfterRouters, handlerCodeError };
