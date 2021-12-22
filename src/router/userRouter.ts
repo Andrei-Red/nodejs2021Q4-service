@@ -3,6 +3,7 @@ import { Context } from 'koa';
 const Router = require('koa-router');
 const UserService = require('../service/userService');
 const UserRouter = require('../models/User');
+const logger = require('../loggerManager/winstonLogger')
 
 const routerUser = new Router();
 const userService = new UserService();
@@ -10,6 +11,7 @@ const userService = new UserService();
 routerUser.get('/users', async (ctx: Context) => {
   try {
     ctx.body = userService.getUsers();
+    logger.info(`Some message: statusCode: ${ctx.response.status}`, {statusCode: ctx.response.status} )
   } catch (e) {
     ctx.response.status = 500;
     console.error(e);
@@ -19,7 +21,7 @@ routerUser.get('/users', async (ctx: Context) => {
 
 routerUser.get('/users/:id', async (ctx: Context) => {
   try {
-    const userId = ctx['params'].id;
+    const userId = ctx.params.id;
     const user = userService.getUsersById(userId);
     if (user) {
       ctx.body = user;
@@ -52,7 +54,7 @@ routerUser.post('/users', async (ctx: Context) => {
 routerUser.put('/users/:id', async (ctx: Context) => {
   try {
     const userData = ctx.request.body;
-    const userId = ctx['params'].id;
+    const userId = ctx.params.id;
 
     ctx.body = userService.updateUser(userId, userData);
   } catch (e) {
@@ -64,7 +66,7 @@ routerUser.put('/users/:id', async (ctx: Context) => {
 
 routerUser.delete('/users/:id', async (ctx: Context) => {
   try {
-    const userId = ctx['params'].id;
+    const userId = ctx.params.id;
 
     const isUserDeleted = userService.deleteUser(userId);
     if (isUserDeleted) {

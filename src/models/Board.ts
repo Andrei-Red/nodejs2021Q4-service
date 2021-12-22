@@ -8,7 +8,9 @@ export interface IBoard {
 
 class Board implements IBoard {
   id: string;
+
   title: string;
+
   columns;
 
   constructor(board: IBoard = {} as IBoard) {
