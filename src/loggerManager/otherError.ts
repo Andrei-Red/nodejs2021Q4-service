@@ -45,8 +45,8 @@ const handlerErrorAfterRouters = async (ctx: Context, next: () => void) => {
   }
 };
 
-const handlerCodeError = async (e: Error) => {
-  await logger.error(`code error: ${e}`);
+const handlerCodeError = (e: Error) => {
+   logger.error(`code error: ${e}`);
 }
 
 module.exports = { handlerError, handlerErrorAfterRouters, handlerCodeError };

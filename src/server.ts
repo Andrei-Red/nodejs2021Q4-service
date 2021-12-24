@@ -8,7 +8,15 @@ const routerTask = require('./router/taskRouter');
 
 const { handlerError, handlerErrorAfterRouters, handlerCodeError } = require('./loggerManager/otherError')
 
-try {
+
+process.on('unhandledRejection', (reason, promise) => {
+  handlerCodeError('Error in inside code', {reason})
+});
+
+process.on('uncaughtException', (reason, promise) => {
+  handlerCodeError('Error in inside code', {reason})
+});
+
   const server = new Koa()
 
   server.use(handlerError)
@@ -27,6 +35,6 @@ try {
   server.listen(config.PORT, () =>
     console.log(`App is running on http://localhost:${config.PORT}`)
   );
-} catch (error) {
-  handlerCodeError(error)
-}
+  Promise.reject(Error('Oops!'));
+  throw Error('Oops!');
+
