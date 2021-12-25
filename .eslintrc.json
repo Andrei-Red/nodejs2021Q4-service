@@ -1,9 +1,5 @@
 {
   "root": true,
-  "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "import"
-  ],
   "env": {
     "es2020": true,
     "jasmine": true,
@@ -18,27 +14,19 @@
     }
   },
   "settings": {
-    "noInlineConfig": true,
-    "node": {
-      "allowModules": ["electron"],
-      "resolvePaths": ["./src"],
-      "tryExtensions": [".ts", ".json", ".node"]
-    }
+    "noInlineConfig": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:node/recommended",
-    "prettier",
-    "plugin:import/typescript"
+    "airbnb-base",
+    "prettier"
   ],
   "rules": {
     "import/extensions": "off",
     "linebreak-style": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
-    "import/prefer-default-export": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "no-unused-vars": "off",
-    "import/no-unresolved": "off"
+    "import/prefer-default-export": "off"
   }
 }
