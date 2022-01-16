@@ -15,12 +15,14 @@
     "lint:fix": "eslint --fix --ext .js.",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace",
-    "docker:up:build": "docker-compose up --build",
-    "docker:up": "docker-compose up",
+
+    "docker:up": "docker-compose up --build",
     "docker:down": "docker-compose down",
-    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js --config ./src/common/ormconfig.ts",
-    "migration:generate": "npm run typeorm migration:generate -- -n MigrationFile",
-    "migration:run": "npm run typeorm -- migration:run"
+    "typeorm": "ts-node --files -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/common/ormconfig.ts",
+    "db:create": "npm run typeorm migration:generate -n TodoMigrations",
+    "db:run": "npm run typeorm -- migration:run",
+    "migrationg": "ts-node ./node_modules/typeorm/cli.js migration:generate -n N"
+
   },
   "keywords": [
     "rs",

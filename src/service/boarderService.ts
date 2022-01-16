@@ -1,9 +1,10 @@
 import { TTrelloDB } from '../db';
 import { IBoard } from '../models/Board';
+import * as boardRepo from '../repository/Board.repository';
 
 const db = require('../db');
 
-interface IBoarderService {
+export interface IBoarderService {
   db: TTrelloDB;
 
   getBoard(): IBoard[];
@@ -14,7 +15,7 @@ interface IBoarderService {
   _deleteBoardSTacks(id: string): void;
 }
 
-class BoarderService implements IBoarderService {
+class BoarderService {
   db: TTrelloDB;
 
   constructor() {
@@ -29,7 +30,7 @@ class BoarderService implements IBoarderService {
    *
    */
   getBoard() {
-    return this.db.boards;
+    return boardRepo.getAll();
   }
 
   /**
@@ -40,7 +41,7 @@ class BoarderService implements IBoarderService {
    *
    */
   getBoardById(id: string) {
-    return this.db.boards.find((u) => u.id === id);
+    return boardRepo.get(id);
   }
 
   /**
@@ -51,8 +52,7 @@ class BoarderService implements IBoarderService {
    *
    */
   addBoard(board: IBoard) {
-    this.db.boards.push(board);
-    return board;
+    return boardRepo.create(board);
   }
 
   /**
@@ -64,12 +64,7 @@ class BoarderService implements IBoarderService {
    *
    */
   updateBoard(id: string, newBoard: IBoard) {
-    const board = this.db.boards.find((u: IBoard) => u.id === id);
-    if (board) {
-      board.title = newBoard.title;
-      board.columns = newBoard.columns;
-    }
-    return board;
+    return boardRepo.update(id, newBoard);
   }
 
   /**
@@ -82,9 +77,11 @@ class BoarderService implements IBoarderService {
   deleteBoard(id: string) {
     const boardIndex = this.db.boards.findIndex((b: IBoard) => b.id === id);
     if (boardIndex !== -1) {
-      this.db.boards.splice(boardIndex, 1);
-      this._deleteBoardSTacks(id);
-      return true;
+      return boardRepo.remove(id).then(() => {
+          return true;
+        }
+      )
+
     }
     return false;
   }

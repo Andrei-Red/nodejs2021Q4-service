@@ -1,5 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
-import { config } from './config';
+import {  config as configE } from './config';
 
 const {
   POSTGRES_HOST,
@@ -7,9 +7,9 @@ const {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
   POSTGRES_DB,
-} = config;
+} = configE;
 
-const configDB: ConnectionOptions = {
+const config: ConnectionOptions = {
   type: 'postgres',
   synchronize: false,
   host: POSTGRES_HOST,
@@ -27,4 +27,4 @@ const configDB: ConnectionOptions = {
   },
 };
 
-export default configDB;
+export default config;

@@ -1,9 +1,10 @@
 import { TTrelloDB } from '../db';
 import { ITask } from '../models/Task';
-
+import * as taskRepo from '../repository/Task.repository';
+import { Task } from '../entities/Task';
 const db = require('../db');
 
-interface ITaskService {
+export interface ITaskService {
   db: TTrelloDB;
 
   getTasks(boardId: string): ITask[];
@@ -16,7 +17,7 @@ interface ITaskService {
   deleteTask(taskId: string): boolean;
 }
 
-class TaskService implements ITaskService {
+class TaskService {
   db: TTrelloDB;
 
   constructor() {
@@ -31,7 +32,7 @@ class TaskService implements ITaskService {
    *
    */
   getTasks(boardId: string) {
-    return this.db.tacks.filter((t) => t.boardId === boardId);
+    return taskRepo.getAll(boardId)
   }
 
   /**
@@ -42,7 +43,7 @@ class TaskService implements ITaskService {
    *
    */
   getTaskById(taskId: string) {
-    return this.db.tacks.find((t: ITask) => t.id === taskId);
+    return taskRepo.get(taskId)
   }
 
   /**
@@ -52,9 +53,8 @@ class TaskService implements ITaskService {
    * @returns Task of type ITask
    *
    */
-  addTask(task: ITask) {
-    this.db.tacks.push(task);
-    return task;
+  addTask(task: Task) {
+    return taskRepo.create(task);
   }
 
   /**
@@ -66,14 +66,7 @@ class TaskService implements ITaskService {
    *
    */
   updateTask(taskId: string, newTask: ITask) {
-    const thisTask = this.db.tacks.find((t: ITask) => t.id === taskId);
-    const { title, order, description } = newTask;
-    if (thisTask) {
-      thisTask.title = title;
-      thisTask.order = order;
-      thisTask.description = description;
-    }
-    return thisTask;
+    return taskRepo.update(taskId, newTask);
   }
 
   /**
@@ -86,8 +79,9 @@ class TaskService implements ITaskService {
   deleteTask(taskId: string) {
     const taskIndex = this.db.tacks.findIndex((t) => t.id === taskId);
     if (taskIndex !== -1) {
-      this.db.tacks.splice(taskIndex, 1);
-      return true;
+      return  taskRepo.remove(taskId).then(() => {
+        return true
+      });
     }
     return false;
   }

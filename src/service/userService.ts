@@ -1,10 +1,11 @@
 import { TTrelloDB } from '../db';
 import { IUser } from '../models/User';
 import { ITask } from '../models/Task';
+import * as usersRepo from '../repository/User.repository';
 
 const db = require('../db');
 
-interface IUserService {
+export interface IUserService {
   db: TTrelloDB;
 
   getUsers(): IUser[];
@@ -15,7 +16,7 @@ interface IUserService {
   _updateUserIdInTacks(userId: string): void;
 }
 
-class UserService implements IUserService {
+class UserService {
   db: TTrelloDB;
 
   constructor() {
@@ -29,7 +30,7 @@ class UserService implements IUserService {
    *
    */
   getUsers() {
-    return this.db.users;
+    return usersRepo.getAll();
   }
 
   /**
@@ -40,7 +41,7 @@ class UserService implements IUserService {
    *
    */
   getUsersById(id: string) {
-    return this.db.users.find((u) => u.id === id);
+    return  usersRepo.get(id);
   }
 
   /**
@@ -51,8 +52,7 @@ class UserService implements IUserService {
    *
    */
   addUser(user: IUser) {
-    this.db.users.push(user);
-    return user;
+    return usersRepo.create(user);
   }
 
   /**
@@ -64,12 +64,7 @@ class UserService implements IUserService {
    *
    */
   updateUser(id: string, newUser: IUser) {
-    const user = this.db.users.find((u: IUser) => u.id === id);
-    if (user) {
-      user.name = newUser.name;
-      user.login = newUser.login;
-    }
-    return user;
+    return  usersRepo.update(id, newUser);
   }
 
   /**
@@ -82,9 +77,7 @@ class UserService implements IUserService {
   deleteUser(id: string) {
     const userIndex = this.db.users.findIndex((u: IUser) => u.id === id);
     if (userIndex !== -1) {
-      this.db.users.splice(userIndex, 1);
-      this._updateUserIdInTacks(id);
-      return true;
+      return usersRepo.remove(id).then(() => true)
     }
     return false;
   }

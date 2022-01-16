@@ -15,6 +15,7 @@ services:
       - andreired-net
     volumes:
       - ./logs:/usr/app/logs
+      - ./src:/usr/app/src
   postgres:
     image: andreired/postgres
     build: ./database/
@@ -27,6 +28,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     networks:
       - andreired-net
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
 networks:
     andreired-net:
       driver: bridge
