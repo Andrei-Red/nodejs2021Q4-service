@@ -1,4 +1,6 @@
 import { config } from './common/config';
+import  ormconfig   from './common/ormconfig';
+import { createConnection } from 'typeorm';
 
 const Koa = require('koa');
 const koaBody = require('koa-body');
@@ -35,9 +37,19 @@ try {
 
   server.use(handlerErrorAfterRouters);
 
-  server.listen(config.PORT, () =>
-    console.log(`App is running on http://localhost:${config.PORT}`)
-  );
+
+  createConnection(ormconfig)
+    .then(() => {
+      server.listen(config.PORT, () =>
+        console.log(`App is running on http://localhost:${config.PORT}`)
+      );
+    })
+    .catch((error: Error) => {
+      process.stderr.write(`${error.name}`);
+      process.exit(1);
+    });
+
+
 } catch (e) {
   handlerCodeError('Error in inside code', { e });
 }

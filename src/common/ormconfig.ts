@@ -20,11 +20,6 @@ const config: ConnectionOptions = {
   entities: ['src/entities/*.{ts,js}'],
   logging: false,
   dropSchema: false,
-  migrations: ['./src/migration/**/*.{ts,js}'],
-  migrationsRun: true,
-  cli: {
-    migrationsDir: 'src/migration',
-  },
 };
 
 export default config;
