@@ -65,8 +65,19 @@ If you're using VSCode, you can get a better developer experience from integrati
 npm run lint
 ```
 
-### Debugging in VSCode
+## Docker
 
-Press <kbd>F5</kbd> to debug.
+### Scripts
+`npm run docker:up:build` - creating images and starting app
 
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+`npm run docker:down` - stop containers and exit app
+
+**Logs send to folder `logs` at the root of the app**
+
+### Additional Information
+- `Dockerfile` for **database** in folder `./database`
+- `Dockerfile`  for **node** at the root of the app `./`
+- `docker-compos` for **main config** at the root of the app `./`
+
+### Docker images
+[Docker Hub](https://hub.docker.com/u/andreired)
