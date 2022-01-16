@@ -11,7 +11,10 @@
     "esModuleInterop": true,
     "outDir": "dist",
     "noUnusedLocals": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["src/**/*"],
 }

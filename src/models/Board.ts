@@ -6,7 +6,7 @@ export interface IBoard {
   columns: [];
 }
 
-class Board implements IBoard {
+export class Board implements IBoard {
   id: string;
 
   title: string;

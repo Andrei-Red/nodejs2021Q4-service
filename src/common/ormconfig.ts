@@ -1,5 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
-import { config } from './src/common/config';
+import { config } from './config';
 
 const {
   POSTGRES_HOST,

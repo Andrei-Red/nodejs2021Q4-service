@@ -7,7 +7,7 @@ export interface IUser {
   password: string;
 }
 
-class User implements IUser {
+export class User implements IUser {
   id: string;
 
   name: string;
