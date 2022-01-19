@@ -14,7 +14,7 @@ services:
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
     volumes:
-      - ./pg_data:${PGDATA}
+      - ./data:${PGDATA}
       - ./postgres:/var/log/postgresql
   node:
     restart: always
