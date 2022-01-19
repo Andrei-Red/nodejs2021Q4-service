@@ -1,0 +1,43 @@
+version: '3.3'
+services:
+  postgres:
+    restart: always
+    image: postgres:14.1-alpine
+    build: ./docker/postgres/
+    networks:
+      - andrei-net
+    container_name: postgres
+    command: postgres -c logging_collector=on
+    env_file: ./.env
+    environment:
+      PGPORT: ${POSTGRES_PORT}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - ./pg_data:${PGDATA}
+      - ./postgres:/var/log/postgresql
+  node:
+    restart: always
+    image: node:16-alpine
+    build:
+      context: .
+      dockerfile: ./docker/server/Dockerfile
+    networks:
+      - andrei-net
+    container_name: node
+    depends_on:
+      - postgres
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      POSTGRES_HOST: postgres
+    volumes:
+      - ./src:/usr/app/src
+      - app_logs:/usr/app/logs
+networks:
+  andrei-net:
+    driver: bridge
+volumes:
+  app_logs:
+  pg_data:
+  postgres_logs:
