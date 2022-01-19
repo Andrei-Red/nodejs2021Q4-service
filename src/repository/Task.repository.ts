@@ -50,30 +50,6 @@ const remove = async (
   return QueryAnswers.DELETED;
 };
 
-// const deleteUserFromTask = async (
-//   userId: string
-// ): Promise<QueryAnswers.DELETED | QueryAnswers.NOT_FOUND> => {
-//   const tasks = await getRepository(Task).find({ userId });
-//   try {
-//     tasks.forEach((task) => {
-//       update(task.boardId, task.id, { userId: null });
-//     });
-//     return QueryAnswers.DELETED;
-//   } catch (e) {
-//     return QueryAnswers.NOT_FOUND;
-//   }
-// };
-
-// const deleteTasksFromBoard = async (
-//   boardId: string
-// ): Promise<QueryAnswers.DELETED | QueryAnswers.NOT_FOUND> => {
-//   try {
-//     tasks = tasks.filter((task) => task.boardId !== boardId);
-//     return QueryAnswers.DELETED;
-//   } catch (e) {
-//     return QueryAnswers.NOT_FOUND;
-//   }
-// };
 
 export {
   getAll,
@@ -81,6 +57,4 @@ export {
   create,
   update,
   remove,
-  // deleteTasksFromBoard,
-  // deleteUserFromTask,
 };

@@ -4,7 +4,7 @@ import { QueryAnswers } from '../types';
 
 
 const getAll = async (): Promise<User[]> => {
-  return getRepository(User).find({
+  return await getRepository(User).find({
     select: ['id', 'login', 'name'],
   });
 };
@@ -47,12 +47,12 @@ const update = async (
 
 const remove = async (
   userId: string
-): Promise<QueryAnswers.DELETED | QueryAnswers.NOT_FOUND> => {
+): Promise<boolean> => {
   const result = await getRepository(User).delete({ id: userId });
   if (!result) {
-    return QueryAnswers.NOT_FOUND;
+    return false
   }
-  return QueryAnswers.DELETED;
+  return true
 };
 
 export { getAll, get, create, update, remove };

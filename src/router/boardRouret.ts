@@ -11,7 +11,7 @@ const boardService = new BoardService();
 
 routerBoard.get('/boards', async (ctx: Context) => {
   try {
-    ctx.body = boardService.getBoard();
+    ctx.body = await boardService.getBoard();
     logger.info('GET', {
       url: ctx.url,
       queryParameters: ctx["params"],
@@ -34,7 +34,7 @@ routerBoard.get('/boards', async (ctx: Context) => {
 routerBoard.get('/boards/:id', async (ctx: Context) => {
   try {
     const boardId = ctx["params"].id;
-    const board = boardService.getBoardById(boardId);
+    const board = await boardService.getBoardById(boardId);
     if (board) {
       ctx.body = board;
     } else {
@@ -64,7 +64,7 @@ routerBoard.post('/boards', async (ctx: Context) => {
   try {
     const boardData = ctx.request.body;
     const board = new Board(boardData);
-    boardService.addBoard(board);
+    await boardService.addBoard(board);
     ctx.response.status = 201;
     ctx.response.body = board;
     logger.info('POST', {
@@ -91,7 +91,7 @@ routerBoard.put('/boards/:id', async (ctx: Context) => {
     const boardData = ctx.request.body;
     const boardsId = ctx["params"].id;
 
-    ctx.body = boardService.updateBoard(boardsId, boardData);
+    ctx.body = await boardService.updateBoard(boardsId, boardData);
     logger.info('PUT', {
       url: ctx.url,
       queryParameters: ctx["params"],
@@ -115,7 +115,7 @@ routerBoard.delete('/boards/:id', async (ctx: Context) => {
   try {
     const boardsId = ctx["params"].id;
 
-    const isBoardDeleted = boardService.deleteBoard(boardsId);
+    const isBoardDeleted = await boardService.deleteBoard(boardsId);
     if (isBoardDeleted) {
       ctx.response.status = 204;
     } else {

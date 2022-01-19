@@ -10,7 +10,7 @@ const userService = new UserService();
 
 routerUser.get('/users', async (ctx: Context) => {
   try {
-    ctx.body = userService.getUsers();
+    ctx.body = await userService.getUsers();
     logger.info('GET', {
       url: ctx.url,
       queryParameters: ctx["params"],
@@ -33,7 +33,7 @@ routerUser.get('/users', async (ctx: Context) => {
 routerUser.get('/users/:id', async (ctx: Context) => {
   try {
     const userId = ctx["params"].id;
-    const user = userService.getUsersById(userId);
+    const user = await userService.getUsersById(userId);
     if (user) {
       ctx.body = user;
     } else {
@@ -64,7 +64,7 @@ routerUser.post('/users', async (ctx: Context) => {
     const userData = ctx.request.body;
     const user = new UserRouter(userData);
     const userDataToResponse = UserRouter.toResponse(user);
-    userService.addUser(userDataToResponse);
+    await userService.addUser(userDataToResponse);
     ctx.response.status = 201;
     ctx.body = userDataToResponse;
     logger.info('POST', {
@@ -91,7 +91,7 @@ routerUser.put('/users/:id', async (ctx: Context) => {
     const userData = ctx.request.body;
     const userId = ctx["params"].id;
 
-    ctx.body = userService.updateUser(userId, userData);
+    ctx.body = await userService.updateUser(userId, userData);
     logger.info('PUT', {
       url: ctx.url,
       queryParameters: ctx["params"],
@@ -115,7 +115,7 @@ routerUser.delete('/users/:id', async (ctx: Context) => {
   try {
     const userId = ctx["params"].id;
 
-    const isUserDeleted = userService.deleteUser(userId);
+    const isUserDeleted = await userService.deleteUser(userId);
     if (isUserDeleted) {
       ctx.response.status = 204;
     } else {

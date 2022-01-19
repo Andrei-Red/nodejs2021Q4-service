@@ -76,15 +76,10 @@ class TaskService {
    * @returns Boolean true if a good action else false
    *
    */
-  deleteTask(taskId: string) {
-    const taskIndex = this.db.tacks.findIndex((t) => t.id === taskId);
-    if (taskIndex !== -1) {
-      return  taskRepo.remove(taskId).then(() => {
-        return true
-      });
-    }
-    return false;
+  async deleteTask(taskId: string) {
+    return await taskRepo.remove(taskId);
   }
+  
 }
 
 module.exports = TaskService;

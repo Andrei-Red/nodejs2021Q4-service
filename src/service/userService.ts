@@ -29,8 +29,8 @@ class UserService {
    * @returns Array Users of type IUser
    *
    */
-  getUsers() {
-    return usersRepo.getAll();
+  async getUsers() {
+    return usersRepo.getAll()
   }
 
   /**
@@ -74,12 +74,8 @@ class UserService {
    * @returns Boolean true if a good action else false
    *
    */
-  deleteUser(id: string) {
-    const userIndex = this.db.users.findIndex((u: IUser) => u.id === id);
-    if (userIndex !== -1) {
-      return usersRepo.remove(id).then(() => true)
-    }
-    return false;
+  async deleteUser(id: string) {
+    return  await usersRepo.remove(id)
   }
 
   /**

@@ -37,11 +37,11 @@ const update = async (
 
 const remove = async (
   id: string
-): Promise<QueryAnswers.DELETED | QueryAnswers.NOT_FOUND> => {
+): Promise<boolean> => {
   const result = await getRepository(Board).delete({ id });
-  if (!result) return QueryAnswers.NOT_FOUND;
+  if (!result) return false;
 
-  return QueryAnswers.DELETED;
+  return true
 };
 
 export { getAll, get, create, update, remove };

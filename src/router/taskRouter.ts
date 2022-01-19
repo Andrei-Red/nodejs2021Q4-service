@@ -12,7 +12,7 @@ const taskService = new TaskService();
 routerTask.get('/boards/:boardId/tasks', async (ctx: Context) => {
   try {
     const { boardId } = ctx["params"];
-    ctx.body = taskService.getTasks(boardId);
+    ctx.body = await taskService.getTasks(boardId);
     logger.info('GET', {
       url: ctx.url,
       queryParameters: ctx["params"],
@@ -36,7 +36,7 @@ routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
     const { taskId } = ctx["params"];
 
-    const task = taskService.getTaskById(taskId);
+    const task =await taskService.getTaskById(taskId);
     if (task) {
       ctx.body = task;
     } else {
@@ -68,7 +68,7 @@ routerTask.post('/boards/:boardId/tasks', async (ctx: Context) => {
     tasksData.boardId = ctx["params"].boardId;
     const task = new Task(tasksData);
 
-    taskService.addTask(task);
+    await taskService.addTask(task);
     ctx.response.status = 201;
     ctx.body = task;
     logger.info('POST', {
@@ -95,7 +95,7 @@ routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
     const { taskId } = ctx["params"];
     const taskData = ctx.request.body;
 
-    ctx.body = taskService.updateTask(taskId, taskData);
+    ctx.body = await taskService.updateTask(taskId, taskData);
     logger.info('PUT', {
       url: ctx.url,
       queryParameters: ctx["params"],
@@ -119,7 +119,7 @@ routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
   try {
     const { taskId } = ctx["params"];
 
-    const isTaskDeleted = taskService.deleteTask(taskId);
+    const isTaskDeleted = await taskService.deleteTask(taskId);
 
     if (isTaskDeleted) {
       ctx.response.status = 204;

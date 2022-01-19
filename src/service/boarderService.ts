@@ -74,16 +74,8 @@ class BoarderService {
    * @returns Boolean true if a good action else false
     *
    */
-  deleteBoard(id: string) {
-    const boardIndex = this.db.boards.findIndex((b: IBoard) => b.id === id);
-    if (boardIndex !== -1) {
-      return boardRepo.remove(id).then(() => {
-          return true;
-        }
-      )
-
-    }
-    return false;
+  async deleteBoard(id: string) {
+    return await boardRepo.remove(id)
   }
 
   /**
