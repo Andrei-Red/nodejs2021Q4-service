@@ -2,7 +2,6 @@ import { TTrelloDB } from '../db';
 import { IBoard } from '../models/Board';
 import * as boardRepo from '../repository/Board.repository';
 
-const db = require('../db');
 
 export interface IBoarderService {
   db: TTrelloDB;
@@ -16,10 +15,7 @@ export interface IBoarderService {
 }
 
 class BoarderService {
-  db: TTrelloDB;
-
   constructor() {
-    this.db = db;
   }
 
 
@@ -85,9 +81,7 @@ class BoarderService {
    * @returns void
    *
    */
-  _deleteBoardSTacks(id: string) {
-    this.db.tacks = this.db.tacks.filter((t) => t.boardId !== id);
-  }
+
 }
 
 module.exports = BoarderService;

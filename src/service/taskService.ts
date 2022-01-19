@@ -2,7 +2,6 @@ import { TTrelloDB } from '../db';
 import { ITask } from '../models/Task';
 import * as taskRepo from '../repository/Task.repository';
 import { Task } from '../entities/Task';
-const db = require('../db');
 
 export interface ITaskService {
   db: TTrelloDB;
@@ -10,20 +9,12 @@ export interface ITaskService {
   getTasks(boardId: string): ITask[];
   getTaskById(taskId: string): ITask | undefined;
   addTask(task: ITask): ITask;
-  updateTask(
-    taskId: string,
-    newTask: ITask
-  ): ITask | undefined;
+  updateTask(taskId: string, newTask: ITask): ITask | undefined;
   deleteTask(taskId: string): boolean;
 }
 
 class TaskService {
-  db: TTrelloDB;
-
-  constructor() {
-    this.db = db;
-  }
-
+  constructor() {}
   /**
    * Getting all Tacks in the Board.
    *
@@ -32,7 +23,7 @@ class TaskService {
    *
    */
   getTasks(boardId: string) {
-    return taskRepo.getAll(boardId)
+    return taskRepo.getAll(boardId);
   }
 
   /**
@@ -43,7 +34,7 @@ class TaskService {
    *
    */
   getTaskById(taskId: string) {
-    return taskRepo.get(taskId)
+    return taskRepo.get(taskId);
   }
 
   /**
@@ -79,7 +70,6 @@ class TaskService {
   async deleteTask(taskId: string) {
     return await taskRepo.remove(taskId);
   }
-  
 }
 
 module.exports = TaskService;

@@ -1,9 +1,7 @@
 import { TTrelloDB } from '../db';
 import { IUser } from '../models/User';
-import { ITask } from '../models/Task';
 import * as usersRepo from '../repository/User.repository';
 
-const db = require('../db');
 
 export interface IUserService {
   db: TTrelloDB;
@@ -17,10 +15,8 @@ export interface IUserService {
 }
 
 class UserService {
-  db: TTrelloDB;
 
   constructor() {
-    this.db = db;
   }
 
   /**
@@ -85,18 +81,7 @@ class UserService {
    * @returns Void
    *
    */
-  _updateUserIdInTacks(userId: string) {
-    function setNullValue(value: ITask) {
-      const theValue = value;
-      theValue.userId = null;
-    }
 
-    this.db.tacks.forEach((task: ITask) => {
-      if (task.userId === userId) {
-        setNullValue(task);
-      }
-    });
-  }
 }
 
 module.exports = UserService;

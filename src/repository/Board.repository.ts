@@ -5,10 +5,10 @@ import { QueryAnswers } from '../types';
 
 const getAll = async (): Promise<Board[]> => getRepository(Board).find();
 
-const get = async (id: string): Promise<Board | QueryAnswers.NOT_FOUND> => {
+const get = async (id: string): Promise<Board | boolean> => {
   const boards = getRepository(Board);
   const board = await boards.findOne({ id });
-  if (!board) return QueryAnswers.NOT_FOUND;
+  if (!board) return false;
 
   return board;
 };
@@ -39,9 +39,7 @@ const remove = async (
   id: string
 ): Promise<boolean> => {
   const result = await getRepository(Board).delete({ id });
-  if (!result) return false;
-
-  return true
+  return !!result
 };
 
 export { getAll, get, create, update, remove };

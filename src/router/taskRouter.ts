@@ -124,7 +124,7 @@ routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: Context) => {
     if (isTaskDeleted) {
       ctx.response.status = 204;
     } else {
-      ctx.response.status = 400;
+      ctx.response.status = 404;
       ctx.body = { message: 'something went wrong' };
     }
     logger.info('DELETE', {

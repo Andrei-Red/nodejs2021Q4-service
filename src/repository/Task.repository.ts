@@ -9,12 +9,12 @@ const getAll = async (boardId: string): Promise<Task[]> => {
 
 const get = async (
   taskId: string
-): Promise<Task | QueryAnswers.NOT_FOUND> => {
+): Promise<Task | boolean> => {
   const task = await getRepository(Task).findOne({
     id: taskId
   });
 
-  if (!task) return QueryAnswers.NOT_FOUND;
+  if (!task) return false;
 
   return task;
 };
@@ -40,14 +40,11 @@ const update = async (
 
 const remove = async (
   taskId: string
-): Promise<QueryAnswers.DELETED | QueryAnswers.NOT_FOUND> => {
+): Promise<boolean> => {
   const result = await getRepository(Task).delete({
     id: taskId
   });
-
-  if (!result) return QueryAnswers.NOT_FOUND;
-
-  return QueryAnswers.DELETED;
+  return !!result
 };
 
 
