@@ -8,6 +8,7 @@ const koaBody = require('koa-body');
 const routerUser = require('./router/userRouter');
 const routerBoard = require('./router/boardRouret');
 const routerTask = require('./router/taskRouter');
+const routerAuth = require('./router/authRouter');
 
 const {
   handlerError,
@@ -35,6 +36,9 @@ try {
   server.use(routerBoard.allowedMethods());
   server.use(routerTask.routes());
   server.use(routerTask.allowedMethods());
+
+  server.use(routerAuth.routes())
+  server.use(routerAuth.allowedMethods())
 
   server.use(handlerErrorAfterRouters);
 
