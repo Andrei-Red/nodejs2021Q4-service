@@ -25,7 +25,7 @@ class UserService {
    * @returns Array Users of type IUser
    *
    */
-  async getUsers() {
+  async getUsers(): Promise<any[]> {
     return usersRepo.getAll()
   }
 

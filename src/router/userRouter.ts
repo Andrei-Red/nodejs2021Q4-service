@@ -64,7 +64,7 @@ routerUser.post('/users', async (ctx: Context) => {
     const userData = ctx.request.body;
     const user = new UserRouter(userData);
     const userDataToResponse = UserRouter.toResponse(user);
-    await userService.addUser(userDataToResponse);
+    await userService.addUser(user);
     ctx.response.status = 201;
     ctx.body = userDataToResponse;
     logger.info('POST', {
