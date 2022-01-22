@@ -5,7 +5,7 @@ const Router = require('koa-router');
 const routerTask = new Router();
 const TaskService = require('../service/taskService');
 const Task = require('../models/Task');
-const logger = require('../loggerManager/winstonLogger');
+const logger = require('../middleware/loggerManager/winstonLogger');
 
 const taskService = new TaskService();
 

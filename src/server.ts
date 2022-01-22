@@ -13,7 +13,7 @@ const {
   handlerError,
   handlerErrorAfterRouters,
   handlerCodeError,
-} = require('./loggerManager/otherError');
+} = require('./middleware/loggerManager/otherError');
 
 try {
   process.on('unhandledRejection', (reason) => {

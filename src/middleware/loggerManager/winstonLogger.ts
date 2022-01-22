@@ -1,4 +1,4 @@
-import { config } from "../common/config";
+import { config } from "../../common/config";
 import { levels } from './levelsConst';
 
 const { createLogger, transports, format } = require('winston');

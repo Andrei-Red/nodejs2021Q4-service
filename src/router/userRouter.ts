@@ -3,7 +3,7 @@ import { Context } from 'koa';
 const Router = require('koa-router');
 const UserService = require('../service/userService');
 const UserRouter = require('../models/User');
-const logger = require('../loggerManager/winstonLogger');
+const logger = require('../middleware/loggerManager/winstonLogger');
 
 const routerUser = new Router();
 const userService = new UserService();
