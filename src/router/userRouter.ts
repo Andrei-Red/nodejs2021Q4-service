@@ -6,7 +6,9 @@ const UserRouter = require('../models/User');
 const logger = require('../middleware/loggerManager/winstonLogger');
 
 const routerUser = new Router();
-const userService = new UserService();
+export const userService = new UserService();
+
+
 
 routerUser.get('/users', async (ctx: Context) => {
   try {

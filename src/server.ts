@@ -1,7 +1,8 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 import { config } from './common/config';
 import { createConnection } from 'typeorm';
 import { authentication } from '../src/middleware/Autentification/Authentication';
+import { initDB } from '../src/helpers/createAdmin';
 
 const Koa = require('koa');
 const koaBody = require('koa-body');
@@ -30,10 +31,9 @@ try {
   server.use(handlerError);
   server.use(koaBody());
 
-
-  server.use(routerAuth.routes())
-  server.use(routerAuth.allowedMethods())
-  server.use(authentication)
+  server.use(routerAuth.routes());
+  server.use(routerAuth.allowedMethods());
+  server.use(authentication);
 
   server.use(routerUser.routes());
   server.use(routerUser.allowedMethods());
@@ -42,24 +42,20 @@ try {
   server.use(routerTask.routes());
   server.use(routerTask.allowedMethods());
 
-
-
   server.use(handlerErrorAfterRouters);
 
-
   createConnection()
+    .then(initDB)
     .then(() => {
       console.log('createConnection SUCCESS');
-      server.listen(config.PORT, () =>
-        console.log(`App is running on http://localhost:${config.PORT}`)
-      );
+      server.listen(config.PORT, () => {
+        console.log(`App is running on http://localhost:${config.PORT}`);
+      });
     })
     .catch((error: Error) => {
       process.stderr.write(`${error.name}`);
       process.exit(1);
     });
-
-
 } catch (e) {
   handlerCodeError('Error in inside code', { e });
 }
