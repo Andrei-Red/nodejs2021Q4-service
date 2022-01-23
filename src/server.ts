@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { config } from './common/config';
-// import  ormconfig   from './common/ormconfig';
 import { createConnection } from 'typeorm';
+import { authentication } from '../src/middleware/Autentification/Authentication';
 
 const Koa = require('koa');
 const koaBody = require('koa-body');
@@ -30,6 +30,11 @@ try {
   server.use(handlerError);
   server.use(koaBody());
 
+
+  server.use(routerAuth.routes())
+  server.use(routerAuth.allowedMethods())
+  server.use(authentication)
+
   server.use(routerUser.routes());
   server.use(routerUser.allowedMethods());
   server.use(routerBoard.routes());
@@ -37,8 +42,7 @@ try {
   server.use(routerTask.routes());
   server.use(routerTask.allowedMethods());
 
-  server.use(routerAuth.routes())
-  server.use(routerAuth.allowedMethods())
+
 
   server.use(handlerErrorAfterRouters);
 

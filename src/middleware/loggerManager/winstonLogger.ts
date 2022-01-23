@@ -33,11 +33,3 @@ const logger = createLogger({
 });
 
 module.exports = logger;
-
-
-// combine(
-//   format.colorize(),
-//   timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-//   format.errors({ stack: true }),
-//   myFormat
-// ),
