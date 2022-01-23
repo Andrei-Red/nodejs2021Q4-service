@@ -12,9 +12,13 @@ routerAuth.post('/login', async (ctx: Context) => {
 
     const user = await AuthService.getUserByLogin(login);
 
+
+
+
     if(user) {
       const token = await AuthService.signToken(login, password)
       console.log('token', token);
+
       if(token) {
         ctx.response.status = 200;
         ctx.body = token

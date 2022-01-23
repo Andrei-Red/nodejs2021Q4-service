@@ -8,7 +8,7 @@ const { SECRET_KEY } = process.env;
 //
 // })
 
-const ALLOWED_ROUTES = ['/login', '/boards'];
+const ALLOWED_ROUTES = ['/login', "/doc", '/'];
 
 export const authentication = async (ctx: Context, next: () => void) => {
   const url = ctx.url;

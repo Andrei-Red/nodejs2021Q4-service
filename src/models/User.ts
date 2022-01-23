@@ -1,3 +1,5 @@
+import { createHash } from '../helpers/bcryptHash';
+
 const { v4 } = require('uuid');
 
 export interface IUser {
@@ -20,7 +22,7 @@ export class User implements IUser {
     this.id = v4();
     this.name = user.name;
     this.login = user.login;
-    this.password = user.password;
+    this.password = createHash(user.password);
   }
 
   /**

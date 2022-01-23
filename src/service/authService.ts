@@ -1,6 +1,7 @@
 import * as authRepo from '../repository/Auth.repository'
 import { getRepository } from 'typeorm';
 import { User } from '../entities/User';
+import { checkHash } from '../helpers/bcryptHash';
 const jwt = require('jsonwebtoken')
 const { SECRET_KEY } = process.env
 
@@ -15,7 +16,7 @@ export class AuthService {
       select: ['id', 'login', 'name', 'password'],
     });
 
-    const currentUser = users.find((u) => (u.login === login && u.password === password))
+    const currentUser = users.find((u) => (u.login === login && checkHash(password, u.password)))
 
     if(currentUser) {
       return jwt.sign({login, password}, SECRET_KEY)
