@@ -1,8 +1,10 @@
-import { Connection } from 'typeorm';
-import { User } from '../entities/User';
-import { createHash } from '../helpers/bcryptHash';
+import { getConnection } from 'typeorm';
+import { createHash } from './bcryptHash';
+import { User } from '../users/user.model';
 
-export const initDB = async (connection: Connection): Promise<void> => {
+export const initDB = async (): Promise<void> => {
+  const connection = getConnection()
+
   connection
     .createQueryBuilder()
     .insert()

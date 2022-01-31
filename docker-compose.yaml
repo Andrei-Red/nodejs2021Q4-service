@@ -3,12 +3,12 @@ services:
   postgres:
     restart: always
     image: postgres:14.1-alpine
-    build: ./docker/postgres/
+    build: postgres
     networks:
       - andrei-net
     container_name: postgres
     command: postgres -c logging_collector=on
-    env_file: ./.env
+    env_file: .env
     environment:
       PGPORT: ${POSTGRES_PORT}
     ports:
@@ -18,9 +18,7 @@ services:
   node:
     restart: always
     image: node:16-alpine
-    build:
-      context: .
-      dockerfile: ./docker/server/Dockerfile
+    build: nest-migrate
     networks:
       - andrei-net
     container_name: node

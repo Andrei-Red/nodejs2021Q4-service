@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const { SALT } = process.env;
 
 export const createHash = (password: string) => {
