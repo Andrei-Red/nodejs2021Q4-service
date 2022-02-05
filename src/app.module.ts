@@ -10,6 +10,7 @@ import { TaskModule } from './task/task.module';
 import { Board } from './board/board.model';
 import { Task } from './task/task.model';
 import { LoginModule } from './login/login.module';
+import { FileModule } from './file/file.module';
 
 
 @Module({
@@ -27,7 +28,7 @@ import { LoginModule } from './login/login.module';
       entitiesDir: './src/entities/',
       migrationsDir: './src/migrations/',
     },
-  }), BoardModule, TaskModule, UsersModule, LoginModule],
+  }), BoardModule, TaskModule, UsersModule, LoginModule, FileModule],
   controllers: [AppController],
   providers: [AppService],
 })

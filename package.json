@@ -21,7 +21,7 @@
     "typeorm": "ts-node --files -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/common/ormconfig.ts",
     "db:create": "npm run typeorm migration:generate -n TodoMigrations",
     "db:run": "npm run typeorm -- migration:run",
-    "migrationg": "ts-node ./node_modules/typeorm/cli.js --config src/common/ormconfig.ts migration:generate -n N"
+    "migrationg": "ts-node ./node_modules/typeorm/cli.js --config src/migrations/1642583878306-test.ts migration:generate -n N"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -50,6 +50,7 @@
     "@nestjs/testing": "^8.0.0",
     "@types/express": "^4.17.13",
     "@types/jest": "27.0.2",
+    "@types/multer": "^1.4.7",
     "@types/node": "^16.0.0",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
