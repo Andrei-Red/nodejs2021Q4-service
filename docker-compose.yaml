@@ -3,7 +3,7 @@ services:
   postgres:
     restart: always
     image: postgres:14.1-alpine
-    build: postgres
+    build: ./postgres
     networks:
       - andrei-net
     container_name: postgres
@@ -18,7 +18,7 @@ services:
   node:
     restart: always
     image: node:16-alpine
-    build: nest-migrate
+    build: .
     networks:
       - andrei-net
     container_name: node
